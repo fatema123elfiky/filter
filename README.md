@@ -3,6 +3,6 @@
 ## partners. 👨‍💻👩‍💻
 - Aly El-Deen Yasser Ali (Aly El-Badry)
 - Mohammed Atef And El-Kader(Toffi)
-- Fatema El-Zahra (El-Feky)
+- Fatema El-Zahra (El-Fiky)
 ## Filters Type 🫧
 - Gray Filter. 
