@@ -7,6 +7,8 @@
 
 --> Fatema El-Zahra (El-Fiky).
 ## Filters Type 🫧
-- Gray Filter.
-- Black and white filter
+-  Gray Filter.
+-  Black and white filter
 -  invert filter
+-  Flip image filter
+- 
