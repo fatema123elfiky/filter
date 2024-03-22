@@ -17,6 +17,20 @@
 #define ll long long
 using namespace std;
 
+bool cont(){
+    while (true){
+        string choice;
+        cout << "Do you want to continue?" << endl;
+        cout << " (1) Yes.\n (2) No.\nEnter Your Choice: ";
+        cin >> choice;
+        if (choice == "1") {
+            cout << endl;
+            return true;}
+        else if (choice == "2") {return false;}
+        else {cout << "Please enter a valid choice." << endl;}
+    }
+}
+
 // ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
 
 int grayscale_conversion(){
