@@ -67,8 +67,44 @@ int invert_image(){
     
 }
 
-// ========================================================>> Filter 4:  <<======================================================== //
+// ========================================================>> Filter 4: Flip image <<================================================================ //
+void Flip_image(){
+    string image_address;
+    cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
+    cout << "Enter the address of the image you want to edit : " ;
+    cin >> image_address;
+    
+    Image image(image_address);
+    int one, two, three;
 
+    for(int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height/2; j++) {
+            for(int k = 0; k < 3; k++) {
+                int v = image(i, j, k);
+                image(i, j, k) = image(i, image.height - j, k);
+                image(i, image.height - j, k) = v;
+            }
+        }
+    }
+    for(int i = 0; i < image.width/2; i++) {
+        for (int j = 0; j < image.height; j++) {
+            for(int k = 0; k < 3; k++) {
+                int v = image(i, j, k);
+                image(i, j, k) = image(image.width - i, j, k);
+                image(image.width - i, j, k) = v;
+            }
+        }
+    }
+
+    cout << "Pls enter image name to store new image\n";
+    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+
+    cin >> image_address;
+    image.saveImage(image_address);
+
+    cout<<endl<<"Image saved in "<<image_address<<" succefully"<< endl << endl;
+
+}
 
 
 // ========================================================>> Filter 5:  <<======================================================== //
@@ -90,7 +126,7 @@ int main(){
         while(true){
             // Menu choice to check of it
             cout << "Choose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image.\n [4] .\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -121,12 +157,14 @@ int main(){
             invert_image();
         }
 
-            //
+            // Flip filter
         else if (choice_menu == "4"){
+            Flip_image()
         }
 
             //
         else if (choice_menu == "5"){
+          
         }
 
             // To exit program
@@ -135,11 +173,12 @@ int main(){
             break;
         }
 
+      
+        cin.ignore(1,'\n');
         // Continue a menu to see if user wants to continue or exit the program.
         while (true){
             cout << "Do You Want To Continue?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
             string choice;
-            cin.ignore(1,'\n');
             getline(cin, choice);
 
             if (choice == "1")              // If he wants to continue
