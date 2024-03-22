@@ -29,7 +29,7 @@ int grayscale_conversion(){
 void black_and_white(){
     string image_address;
     cout << endl << "# ===== Welcome to Black and White Filter ===== #" << endl;
-    cout << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
+    cout << "Note enter the image with extenction .jpg, .bmp, .png, .tga" << endl ;
     cout << "Enter the address of the image you want to edit : " ;
     cin >> image_address;
     
@@ -53,13 +53,13 @@ void black_and_white(){
             
         }
     }
-    cout << "Pls enter image name to store new image\n";
+    cout << "Please, Enter image name to store new image\n";
     cout << "and specify extension .jpg, .bmp, .png, .tga: ";
 
     cin >> image_address;
     image.saveImage(image_address);
 
-    cout<<endl<<"Image saved in "<<image_address<<" succefully"<< endl << endl;
+    cout << endl << "Image saved in " << image_address << " succefully" << endl << endl;
 }
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
@@ -103,7 +103,7 @@ void Flip_image(){
     string choice;
     while(true){
         cout << "\n# ===== Welcome to Flip image filter ===== #\n";
-        cout << "How do u want to flip the image?\n[1] Horizontal flip\n[2] Vertical flip\n Your choice:";
+        cout << "How do you want to flip the image?\n [1] Horizontal flip.\n [2] Vertical flip.\nEnter Your Choice:";
         getline(cin, choice);
 
         bool check = false;
@@ -120,7 +120,7 @@ void Flip_image(){
     }
 
     string image_address;
-    cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
+    cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga" << endl ;
     cout << "Enter the address of the image you want to edit : " ;
     cin >> image_address;
     
@@ -149,13 +149,13 @@ void Flip_image(){
         }
     }
 
-    cout << "Pls enter image name to store new image\n";
+    cout << "Please, Enter image name to store new image\n";
     cout << "and specify extension .jpg, .bmp, .png, .tga: ";
 
     cin >> image_address;
     image.saveImage(image_address);
 
-    cout<<endl<<"Image saved in "<<image_address<<" succefully"<< endl << endl;
+    cout << endl << "Image saved in " << image_address << " successfully" << endl << endl;
 
 }
 
