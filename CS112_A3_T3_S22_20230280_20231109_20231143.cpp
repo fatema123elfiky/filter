@@ -72,7 +72,8 @@ int invert_image(){
 void Flip_image(){    
     string choice;
     while(true){
-        cout<<"\nHow do u want to flip the image?\n[1] Horizontal flip\n[2] Vertical flip\n Your choice:";
+        cout << "\n# ===== Welcome to Flip image filter ===== #\n";
+        cout << "How do u want to flip the image?\n[1] Horizontal flip\n[2] Vertical flip\n Your choice:";
         getline(cin, choice);
 
         bool check = false;
