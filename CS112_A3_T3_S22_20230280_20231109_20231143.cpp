@@ -48,7 +48,7 @@ int invert_image(){
 
 int main(){
     // showing what program do
-    cout << "# ===== Welcome To Photoshop Application ===== #" << endl;
+    cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "==> A small program that make some photoshop edits on any image you want by only using its address," << endl; 
     cout << "in this once there is a 5 different filters that are : graysale filter, black and white filter," << endl;
     cout << "invert image filter," << endl;
@@ -60,7 +60,7 @@ int main(){
         while(true){
             // Menu choice to check of it 
             cout << "Choose One Of This Filters:-" << endl;
-            cout << "[1] Grayscale Conversion.\n[2] Black and White.\n[3] Invert Image.\n[4] .\n[5] .\n[6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image.\n [4] .\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -107,7 +107,7 @@ int main(){
 
         // continue menu to see if user wants to continue or exit program
         while (true){
-            cout << "Do You Want To Continue?\n[1] Yes\n[2] No\nYour choice : "; 
+            cout << "Do You Want To Continue?\n [1] Yes.\n [2] No.\nEnter Your choice : "; 
             string choice;
             getline(cin, choice_menu);
             
@@ -125,7 +125,7 @@ int main(){
 
         // To see if user wants to change photo or not
         while(true) {
-            cout << "Do You Want To Change Photo?\n[1] Yes\n[2] No\nYour choice : "; 
+            cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice : "; 
             string choice;
             getline(cin, choice_menu);
             
