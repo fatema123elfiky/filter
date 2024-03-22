@@ -26,9 +26,39 @@ int grayscale_conversion(){
 }
 
 // ========================================================>> Filter 2: Black and White <<============================================================ //
-
-int black_and_white(){
+void black_and_white(){
+    string image_address;
+    cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
+    cout << "Enter the address of the image you want to edit : " ;
+    cin >> image_address;
     
+    Image image(image_address);
+    
+    for(int i = 0; i < image.width/2; i++) {
+        for (int j = 0; j < image.height/2; j++) {
+            int average = 0;
+            for(int k = 0; k < 3 ; k++) 
+                average += image(i , j, k);
+            if(average/3 > 124){
+                image(i, j, 0) = 255;
+                image(i, j, 1) = 255;
+                image(i, j, 2) = 255;
+            }
+            else{
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
+            }
+            
+        }
+    }
+    cout << "Pls enter image name to store new image\n";
+    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+
+    cin >> image_address;
+    image.saveImage(image_address);
+
+    cout<<endl<<"Image saved in "<<image_address<<" succefully"<< endl << endl;
 }
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
