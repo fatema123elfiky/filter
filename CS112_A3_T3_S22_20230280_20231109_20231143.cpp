@@ -48,23 +48,23 @@ int invert_image(){
 
 int main(){
     // showing what program do
-    cout << "# ===== Welcome To Photoshop Application ===== #" << endl;
-    cout << "==> A small program that make some photoshop edits on any image you want by only using its address," << endl; 
-    cout << "in this once there is a 5 different filters that are : graysale filter, black and white filter," << endl;
-    cout << "invert image filter," << endl;
+    cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
+    cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
+    cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
+    cout << "    invert image filter," << endl;
     cout << "===================================================================================================" << endl;
-    
+
     // To keep the program running
     while (true){
         string choice_menu;
         while(true){
-            // Menu choice to check of it 
+            // Menu choice to check of it
             cout << "Choose One Of This Filters:-" << endl;
-            cout << "[1] Grayscale Conversion.\n[2] Black and White.\n[3] Invert Image.\n[4] .\n[5] .\n[6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image.\n [4] .\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
-            for(int i = 1; i <= 6; i++){         // checking of answer
+            for(int i = 1; i <= 6; i++){         // Checking of answer.
                 if(choice_menu == to_string(i)){
                     check = true;
                     break;
@@ -81,62 +81,63 @@ int main(){
             grayscale_conversion();
         }
 
-        // Black and White filter
+            // Black and White filter
         else if (choice_menu == "2"){
             black_and_white();
         }
 
-        // Invert Image filter
+            // Invert Image filter
         else if (choice_menu == "3"){
             invert_image();
         }
-        
-        // 
+
+            //
         else if (choice_menu == "4"){
         }
 
-        //
+            //
         else if (choice_menu == "5"){
         }
 
-        // To exit program
+            // To exit program
         else if (choice_menu == "6"){
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
             break;
         }
 
-        // continue menu to see if user wants to continue or exit program
+        // Continue a menu to see if user wants to continue or exit the program.
         while (true){
-            cout << "Do You Want To Continue?\n[1] Yes\n[2] No\nYour choice : "; 
+            cout << "Do You Want To Continue?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
             string choice;
+            cin.ignore(1,'\n');
             getline(cin, choice);
-            
+
             if (choice == "1")              // If he wants to continue
                 break;
-            
-            else if (choice == "2"){        // If he don't
+
+            else if (choice == "2"){        // If he doesn't
                 cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
                 return 0;
             }
 
-            // If he entered a invalid choice
+            // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
         }
 
-        // To see if user wants to change photo or not
+        // To see if a user wants to change a photo or not
         while(true) {
-            cout << "Do You Want To Change Photo?\n[1] Yes\n[2] No\nYour choice : "; 
+            cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
             string choice1;
             getline(cin, choice1);
-            
+
             if (choice1 == "1"){              // If he wants to
             }
 
-            else if (choice1 == "2"){        // If he don't
+            else if (choice1 == "2"){        // If he doesn't
                 break;
             }
 
-            // If he entered a invalid choice
+            // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
         }
 
