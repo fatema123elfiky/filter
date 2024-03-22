@@ -183,7 +183,7 @@ int main(){
 
             // Flip filter
         else if (choice_menu == "4"){
-            Flip_image()
+            Flip_image();
         }
 
             //
