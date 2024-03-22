@@ -65,7 +65,37 @@ void black_and_white(){
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
 
 int invert_image(){
-    
+    string image_address;
+    cout << endl << "# ===== Welcome to Invert Image Filter ===== #" << endl;
+    cout << "Please, Enter colored image name to turn to gray scale: ";
+    cin >> image_address;
+    string extension = image_address.substr(image_address.size()-4,4);
+    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+        Image image(image_address);
+
+        for (int i = 0; i < image.width; ++i) {
+            for (int j = 0; j < image.height; ++j) {
+                for (int k = 0; k < 3; ++k) {
+                    image(i, j, k) = 255 - image(i, j, k);
+                }
+            }
+        }
+
+        while (true){
+            cout << "Please, Enter image name to store new image\n";
+            cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+            cin >> image_address;
+            extension = image_address.substr(image_address.size()-4,4);
+            if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+                image.saveImage(image_address);
+                cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
+                break;
+            }
+            else {cout << "The image's extension is incorrect." << endl;}
+        }
+    }
+    else {cout << "The image's extension is incorrect." << endl;}
+    return 0;
 }
 
 // ========================================================>> Filter 4: Flip image <<================================================================ //
