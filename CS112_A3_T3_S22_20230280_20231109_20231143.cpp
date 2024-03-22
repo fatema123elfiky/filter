@@ -48,7 +48,7 @@ int invert_image(){
 
 int main(){
     // showing what program do
-    cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
+    cout << "# ===== Welcome To Photoshop Application ===== #" << endl;
     cout << "==> A small program that make some photoshop edits on any image you want by only using its address," << endl; 
     cout << "in this once there is a 5 different filters that are : graysale filter, black and white filter," << endl;
     cout << "invert image filter," << endl;
@@ -60,20 +60,20 @@ int main(){
         while(true){
             // Menu choice to check of it 
             cout << "Choose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image.\n [4] .\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
+            cout << "[1] Grayscale Conversion.\n[2] Black and White.\n[3] Invert Image.\n[4] .\n[5] .\n[6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
             for(int i = 1; i <= 6; i++){         // checking of answer
-                if(choice_menu != to_string(i)){
+                if(choice_menu == to_string(i)){
                     check = true;
                     break;
                 }
             }
 
-            if(!check)
+            if(check)
                 break;
-            cout << "Invalid Choice. Try Again." << endl;
+            cout << "Invalid Choice. Try Again." << endl << endl;
         }
 
         // Gray scale filter
@@ -107,9 +107,9 @@ int main(){
 
         // continue menu to see if user wants to continue or exit program
         while (true){
-            cout << "Do You Want To Continue?\n [1] Yes.\n [2] No.\nEnter Your choice : "; 
+            cout << "Do You Want To Continue?\n[1] Yes\n[2] No\nYour choice : "; 
             string choice;
-            getline(cin, choice_menu);
+            getline(cin, choice);
             
             if (choice == "1")              // If he wants to continue
                 break;
@@ -125,14 +125,14 @@ int main(){
 
         // To see if user wants to change photo or not
         while(true) {
-            cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice : "; 
-            string choice;
-            getline(cin, choice_menu);
+            cout << "Do You Want To Change Photo?\n[1] Yes\n[2] No\nYour choice : "; 
+            string choice1;
+            getline(cin, choice1);
             
-            if (choice == "1"){              // If he wants to
+            if (choice1 == "1"){              // If he wants to
             }
 
-            else if (choice == "2"){        // If he don't
+            else if (choice1 == "2"){        // If he don't
                 break;
             }
 
