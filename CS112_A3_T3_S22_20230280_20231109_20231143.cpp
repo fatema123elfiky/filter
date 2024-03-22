@@ -29,7 +29,7 @@ int grayscale_conversion(){
 void black_and_white(){
     string image_address;
     cout << endl << "# ===== Welcome to Black and White Filter ===== #" << endl;
-    cout << "Note enter the image with extenction .jpg, .bmp, .png, .tga" << endl ;
+    cout << "Note enter the image with extension .jpg, .bmp, .png, .tga" << endl ;
     cout << "Enter the address of the image you want to edit : " ;
     cin >> image_address;
     
@@ -59,7 +59,7 @@ void black_and_white(){
     cin >> image_address;
     image.saveImage(image_address);
 
-    cout << endl << "Image saved in " << image_address << " succefully" << endl << endl;
+    cout << endl << "Image saved in " << image_address << " successfully." << endl << endl;
 }
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
@@ -180,7 +180,7 @@ int main(){
         while(true){
             // Menu choice to check of it
             cout << "Choose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image.\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
