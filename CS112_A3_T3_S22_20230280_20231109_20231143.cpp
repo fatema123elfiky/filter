@@ -28,7 +28,8 @@ int grayscale_conversion(){
 // ========================================================>> Filter 2: Black and White <<============================================================ //
 void black_and_white(){
     string image_address;
-    cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
+    cout << endl << "# ===== Welcome to Black and White Filter ===== #" << endl;
+    cout << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
     cout << "Enter the address of the image you want to edit : " ;
     cin >> image_address;
     
@@ -68,30 +69,51 @@ int invert_image(){
 }
 
 // ========================================================>> Filter 4: Flip image <<================================================================ //
-void Flip_image(){
+void Flip_image(){    
+    string choice;
+    while(true){
+        cout<<"\nHow do u want to flip the image?\n[1] Horizontal flip\n[2] Vertical flip\n Your choice:";
+        getline(cin, choice);
+
+        bool check = false;
+        for(int i = 1; i <= 2; i++){         // Checking of answer.
+            if(choice == to_string(i)){
+                check = true;
+                break;
+            }
+        }
+
+        if(check)
+            break;
+        cout << "Invalid Choice. Try Again." << endl << endl;
+    }
+
     string image_address;
     cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga"<< endl ;
     cout << "Enter the address of the image you want to edit : " ;
     cin >> image_address;
     
     Image image(image_address);
-    int one, two, three;
 
-    for(int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height/2; j++) {
-            for(int k = 0; k < 3; k++) {
-                int v = image(i, j, k);
-                image(i, j, k) = image(i, image.height - j, k);
-                image(i, image.height - j, k) = v;
+    if(choice == "2"){
+        for(int i = 0; i < image.width; i++) {
+            for (int j = 0; j < image.height/2; j++) {
+                for(int k = 0; k < 3; k++) {
+                    int v = image(i, j, k);
+                    image(i, j, k) = image(i, image.height - j, k);
+                    image(i, image.height - j, k) = v;
+                }
             }
         }
     }
-    for(int i = 0; i < image.width/2; i++) {
-        for (int j = 0; j < image.height; j++) {
-            for(int k = 0; k < 3; k++) {
-                int v = image(i, j, k);
-                image(i, j, k) = image(image.width - i, j, k);
-                image(image.width - i, j, k) = v;
+    else{
+        for(int i = 0; i < image.width/2; i++) {
+            for (int j = 0; j < image.height; j++) {
+                for(int k = 0; k < 3; k++) {
+                    int v = image(i, j, k);
+                    image(i, j, k) = image(image.width - i, j, k);
+                    image(image.width - i, j, k) = v;
+                }
             }
         }
     }
@@ -105,6 +127,7 @@ void Flip_image(){
     cout<<endl<<"Image saved in "<<image_address<<" succefully"<< endl << endl;
 
 }
+
 
 
 // ========================================================>> Filter 5:  <<======================================================== //
