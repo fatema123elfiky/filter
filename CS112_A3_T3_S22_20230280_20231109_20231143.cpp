@@ -163,28 +163,124 @@ void Flip_image(){
 
 // ========================================================>> Filter 5:  <<======================================================== //
 
+// ========================================================>> Filter 6: Rotate Image <<======================================================== //
+
+int rotate_image(){
+    string image_address;
+    cout << endl << "# ===== Welcome to Rotate Image Filter ===== #" << endl;
+    cout << "Please, Enter colored image name to rotate it: ";
+    cin >> image_address;
+    string extension = image_address.substr(image_address.size()-4,4);
+    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+        Image image(image_address);
+        Image image2(image.height, image.width);
+        string choice;
+        while (true){
+            cout << "\nYou want to rotate this image clockwise by : .........\n";
+            cout << " [1] 90.\n [2] 180.\n [3] 270.\nEnter Your Choice: ";
+            cin >> choice;
+
+            if (choice == "1"){
+                for (int i = 0; i < image.width; ++i) {
+                    for (int j = 0; j < image.height; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            image2(image.height - j, i, k) = image(i, j, k);
+                        }
+                    }
+                }
+                while (true){
+                    cout << "\nPlease, Enter image name to store new image\n";
+                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+                    cin >> image_address;
+                    extension = image_address.substr(image_address.size()-4,4);
+                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+                        image2.saveImage(image_address);
+                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
+                        system(image_address.c_str());
+                        break;
+                    }
+                    else {cout << "The image's extension is incorrect." << endl;}
+                }
+                break;
+            }
+              
+            else if (choice == "2")
+            {
+                Image image2(image.width,image.height);
+                for (int i = 0; i < image.width ; ++i) {
+                    for (int j = 0; j < image.height; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            image2(i, j, k) = image(image.width - i,image.height - j, k);
+                        }
+                    }
+                }
+                while (true){
+                    cout << "\nPlease, Enter image name to store new image\n";
+                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+                    cin >> image_address;
+                    extension = image_address.substr(image_address.size()-4,4);
+                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+                        image2.saveImage(image_address);
+                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
+                        system(image_address.c_str());
+                        break;
+                    }
+                    else {cout << "The image's extension is incorrect." << endl;}
+                }
+                break;
+            }
+              
+            else if (choice == "3")
+            {
+                for (int i = 0; i < image.width; ++i) {
+                    for (int j = 0; j < image.height; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            image2(j, i, k) = image(image.width - i, j, k);
+                        }
+                    }
+                }
+                while (true){
+                    cout << "\nPlease, Enter image name to store new image\n";
+                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+                    cin >> image_address;
+                    extension = image_address.substr(image_address.size()-4,4);
+                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
+                        image2.saveImage(image_address);
+                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
+                        system(image_address.c_str());
+                        break;
+                    }
+                    else {cout << "The image's extension is incorrect." << endl;}
+                }
+                break;
+            }
+        }
+    }
+    else {cout << "The image's extension is incorrect." << endl;}
+    return 0;
+}
 
 // ===============================================================>> Main Application <<=============================================================== //
 
 int main(){
-    // showing what program do
+    // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
     cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
     cout << "    invert image filter," << endl;
     cout << "===================================================================================================" << endl;
 
-    // To keep the program running
+    // To keep the program running.
     while (true){
         string choice_menu;
         while(true){
             // Menu choice to check of it
             cout << "Choose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image.\n [5] .\n [6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image.\n [5] .\n [6] Rotate Image.\n [7] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
-            for(int i = 1; i <= 6; i++){         // Checking of answer.
+            for(int i = 1; i <= 7; i++){         // Checking of answer.
                 if(choice_menu == to_string(i)){
                     check = true;
                     break;
@@ -220,9 +316,14 @@ int main(){
         else if (choice_menu == "5"){
           
         }
+          
+            //
+        else if (choice_menu == "6"){
+          rotate_image();
+        }
 
             // To exit program
-        else if (choice_menu == "6"){
+        else if (choice_menu == "7"){
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
             break;
         }
