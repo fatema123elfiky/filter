@@ -22,6 +22,35 @@ using namespace std;
 // ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
 
 int grayscale_conversion(){
+    cout << "welcome to the grayscale filter\n";
+    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+    cout << "pls enter the name\n";
+    string nameimage;
+    getline(cin, nameimage);
+    Image image(nameimage);
+    for (int i = 0; i < image.width; i++)
+    {
+        for (int j = 0; j < image.height; j++)
+        {
+            int avg = 0;
+            for (int k = 0; k < 3; k++)
+            {
+                avg += image(i, j, k);
+            }
+            avg = avg / 3;
+            for (int k = 0; k < 3; k++)
+            {
+                image(i, j, k) = avg;
+            }
+
+        }
+
+    }
+    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+    cout << "pls enter the name you want to save the image with\n";
+    string nameOfSavedImage;
+    getline(cin, nameOfSavedImage);
+    image.saveImage(nameOfSavedImage);
     
 }
 
