@@ -16,6 +16,7 @@
 
 #include <bits/stdc++.h>
 #include "Image_Class.h"
+#include<string>
 #define ll long long
 using namespace std;
 
