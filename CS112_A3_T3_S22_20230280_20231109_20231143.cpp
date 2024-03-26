@@ -52,6 +52,7 @@ int grayscale_conversion(){
     string nameOfSavedImage;
     getline(cin, nameOfSavedImage);
     image.saveImage(nameOfSavedImage);
+    return 0;
     
 }
 
