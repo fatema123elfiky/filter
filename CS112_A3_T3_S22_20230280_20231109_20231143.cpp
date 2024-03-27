@@ -139,7 +139,7 @@ void Flip_image(){
             getline(cin, choice);
 
             bool check = false;
-            for(int i = 1; i <= 2; i++){         // Checking of answer.
+            for(int i = 1; i <= 3; i++){         // Checking of answer.
                 if(choice == to_string(i)){
                     check = true;
                     break;
@@ -154,8 +154,8 @@ void Flip_image(){
         string image_address;
         cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga" << endl ;
         cout << "Enter the address of the image you want to edit : " ;
-        cin >> image_address;
-    
+        getline(cin, image_address);
+
         Image image(image_address);
 
         if(choice == "2"){
@@ -163,8 +163,8 @@ void Flip_image(){
                 for (int j = 0; j < image.height/2; j++) {
                     for(int k = 0; k < 3; k++) {
                         int v = image(i, j, k);
-                        image(i, j, k) = image(i, image.height - j, k);
-                        image(i, image.height - j, k) = v;
+                        image(i, j, k) = image(i, image.height - j -1, k);
+                        image(i, image.height - j - 1, k) = v;
                     }
                 }
             }
@@ -181,6 +181,15 @@ void Flip_image(){
             }
         }
         else{
+            for(int i = 0; i < image.width; i++) {
+                for (int j = 0; j < image.height/2; j++) {
+                    for(int k = 0; k < 3; k++) {
+                        int v = image(i, j, k);
+                        image(i, j, k) = image(i, image.height - j -1, k);
+                        image(i, image.height - j -1, k) = v;
+                    }
+                }
+            }
             for(int i = 0; i < image.width/2; i++) {
                 for (int j = 0; j < image.height; j++) {
                     for(int k = 0; k < 3; k++) {
@@ -190,26 +199,18 @@ void Flip_image(){
                     }
                 }
             }
-            for(int i = 0; i < image.width; i++) {
-                for (int j = 0; j < image.height/2; j++) {
-                    for(int k = 0; k < 3; k++) {
-                        int v = image(i, j, k);
-                        image(i, j, k) = image(i, image.height - j, k);
-                        image(i, image.height - j, k) = v;
-                    }
-                }
-            }
         }
 
         cout << "Please, Enter image name to store new image\n";
         cout << "and specify extension .jpg, .bmp, .png, .tga: ";
 
-        cin >> image_address;
+        getline(cin, image_address);
         image.saveImage(image_address);
+        system(image_address.c_str());
 
         cout << endl << "Image saved in " << image_address << " successfully" << endl << endl;
     
-        cin.ignore(1, '\n');
+        cin.ignore(0, '\n');
         while(true){
             cout << "Do you want to make another flip?\n [1] Yes\n [2] No\n your choice :";
             string choice;
@@ -225,11 +226,11 @@ void Flip_image(){
 
 // ========================================================>> Filter 5: Rotate Image <<======================================================== //
 
-int rotate_image(){
+void rotate_image(){
     string image_address;
     cout << endl << "# ===== Welcome to Rotate Image Filter ===== #" << endl;
     cout << "Please, Enter colored image name to rotate it: ";
-    cin >> image_address;
+    getline(cin, image_address);
     string extension = image_address.substr(image_address.size()-4,4);
     if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
         Image image(image_address);
@@ -266,11 +267,21 @@ int rotate_image(){
 
             else if (choice == "2")
             {
-                Image image2(image.width,image.height);
-                for (int i = 0; i < image.width ; ++i) {
-                    for (int j = 0; j < image.height; ++j) {
-                        for (int k = 0; k < 3; ++k) {
-                            image2(i, j, k) = image(image.width - i,image.height - j, k);
+                for(int i = 0; i < image.width/2; i++) {
+                    for (int j = 0; j < image.height; j++) {
+                        for(int k = 0; k < 3; k++) {
+                            int v = image(i, j, k);
+                            image(i, j, k) = image(image.width - i, j, k);
+                            image(image.width - i, j, k) = v;
+                        }
+                    }
+                }
+                for(int i = 0; i < image.width; i++) {
+                    for (int j = 0; j < image.height/2; j++) {
+                        for(int k = 0; k < 3; k++) {
+                            int v = image(i, j, k);
+                            image(i, j, k) = image(i, image.height - j -1, k);
+                            image(i, image.height - j -1, k) = v;
                         }
                     }
                 }
@@ -280,7 +291,7 @@ int rotate_image(){
                     cin >> image_address;
                     extension = image_address.substr(image_address.size()-4,4);
                     if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-                        image2.saveImage(image_address);
+                        image.saveImage(image_address);
                         cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
                         system(image_address.c_str());
                         break;
@@ -302,7 +313,7 @@ int rotate_image(){
                 while (true){
                     cout << "\nPlease, Enter image name to store new image\n";
                     cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-                    cin >> image_address;
+                    getline(cin, image_address);
                     extension = image_address.substr(image_address.size()-4,4);
                     if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
                         image2.saveImage(image_address);
@@ -317,9 +328,7 @@ int rotate_image(){
         }
     }
     else {cout << "The image's extension is incorrect." << endl;}
-    return 0;
 }
-
 // ===============================================================>> Main Application <<=============================================================== //
 
 int main(){
