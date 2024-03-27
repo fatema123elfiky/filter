@@ -11,4 +11,4 @@
 -  Black and white filter
 -  invert filter
 -  Flip image filter
-- 
+-  Rotating Image filter
