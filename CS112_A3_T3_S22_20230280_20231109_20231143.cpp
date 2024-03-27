@@ -1,6 +1,6 @@
-  /*
+/*
 --> Name: CS112_A3_T3_S22_20230280_20231109_20231143.cpp
---> Purpose: A small program that make some photoshop edits on any image you want by only using its address, 
+--> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
              in this once there is a 5 different filters that are : graysale filter, black and white filter,
              invert image filter,
 
@@ -12,187 +12,198 @@
 
 --> Author of (3, 6, 9. 12) filters: Mohammed Atef Abd EL-Kader Bayomi.                 (ID:20231143)         (Section : S22)
 --> Email : mohamed45452020@gmail.com
-======================================================================================================================================================== */
-
+======================================================================================================================================================================= */
+// Definging liberary
 #include <bits/stdc++.h>
 #include "Image_Class.h"
-#include<string>
+#include <fstream>
 #define ll long long
 using namespace std;
 
-// ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
-
-int grayscale_conversion(){
-    cout << "welcome to the grayscale filter\n";
-    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
-    cout << "pls enter the name\n";
-    string nameimage;
-    cin >> nameimage;
-    Image image(nameimage);
-    for (int i = 0; i < image.width; i++)
-    {
-        for (int j = 0; j < image.height; j++)
-        {
-            int avg = 0;
-            for (int k = 0; k < 3; k++)
-            {
-                avg += image(i, j, k);
-            }
-            avg = avg / 3;
-            for (int k = 0; k < 3; k++)
-            {
-                image(i, j, k) = avg;
-            }
-
+// Defining some functions
+// To check the existence of image 
+string validationpart1(string nameimage) {
+    while (true){
+        ifstream file_stream(nameimage);
+        try {
+            if (file_stream.is_open())
+                break;
+            else 
+                throw std::runtime_error("File is not exist , pls enter again\n");
         }
-
+        catch (const std::exception& e) {
+            cout << "Please enter again a valid photo : ";
+            getline(cin, nameimage);
+        }
     }
-    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
-    cout << "pls enter the name you want to save the image with\n";
-    string nameOfSavedImage;
-    cin >> nameOfSavedImage;
-    image.saveImage(nameOfSavedImage);
-    return 0;
-    
+    return nameimage;
 }
 
+
+// To check if the name of photo is valid and extension
+string validationpart2(string nameOfSavedImage) {
+    while (nameOfSavedImage.size() <= 4) {
+        cout << "The name is too short enter again : ";
+        getline(cin, nameOfSavedImage);
+    }
+    string extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
+
+    while (extension != ".jpg" && extension != ".png" && extension != ".bmg" && extension != ".tga"){
+        cout << "Please enter the name of the image with correct extension : ";
+        getline(cin, nameOfSavedImage);
+        while (nameOfSavedImage.size() <= 4) {
+            cout << "The name is too short enter again : ";
+            getline(cin, nameOfSavedImage);
+        }
+        extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
+    }
+    return nameOfSavedImage;
+}
+
+
+string savingWay(string originname){
+    cout << "Do you like to save in new image or the same one?\n [1] Save in new image\n [2] Save in the same picture\nYour choice: ";
+    string choice;
+    getline(cin, choice);
+    while (choice != "1" && choice != "2") {
+        cout << "Enter a valid choice : ";
+        getline(cin, choice);
+    }
+    string nameOfSavedImage;
+    if (choice == "1") {
+        //string nameOfSavedImage;
+        cout << "The filename should end with the extension (.jpg or.png or.bmg or.tga)\n";
+        cout << "Enter the name of the new image: ";
+        getline(cin, nameOfSavedImage);
+        nameOfSavedImage = validationpart2(nameOfSavedImage);
+    }
+    else
+        nameOfSavedImage = originname;
+    return nameOfSavedImage;
+}
+
+// ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
+
+void grayscale_conversion(string nameimage) {
+    cout << "\n# ===== Welcome to the Grayscale Filter ===== #\n";
+    Image image(nameimage);
+
+    // To get the degree of the gray colour
+    for (int i = 0; i < image.width; i++){
+        for (int j = 0; j < image.height; j++){
+            int avg = 0;
+            for (int k = 0; k < 3; k++)
+                avg += image(i, j, k);
+
+            avg = avg / 3;
+
+            for (int k = 0; k < 3; k++)
+                image(i, j, k) = avg;
+        }
+    }
+    string saved = savingWay(nameimage);
+    image.saveImage(saved);
+    system(saved.c_str());
+    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
+}
+
+
 // ========================================================>> Filter 2: Black and White <<============================================================ //
-void black_and_white(){
-    string image_address;
-    cout << endl << "# ===== Welcome to Black and White Filter ===== #" << endl;
-    cout << "Note enter the image with extension .jpg, .bmp, .png, .tga" << endl ;
-    cout << "Enter the address of the image you want to edit : " ;
-    cin >> image_address;
-    
+void black_and_white(string image_address) {
+    cout << endl << "\n# ===== Welcome to Black and White Filter ===== #" << endl;
     Image image(image_address);
-    
-    for(int i = 0; i < image.width; i++) {
+
+    // To make the dark point black and the light point white
+    for (int i = 0; i < image.width; i++) {
         for (int j = 0; j < image.height; j++) {
             int average = 0;
-            for(int k = 0; k < 3 ; k++) 
-                average += image(i , j, k);
-            if(average/3 > 124){
+            for (int k = 0; k < 3; k++)
+                average += image(i, j, k);
+            if (average / 3 > 124) {
                 image(i, j, 0) = 255;
                 image(i, j, 1) = 255;
                 image(i, j, 2) = 255;
             }
-            else{
+            else {
                 image(i, j, 0) = 0;
                 image(i, j, 1) = 0;
                 image(i, j, 2) = 0;
             }
-            
         }
     }
-    cout << "Please, Enter image name to store new image\n";
-    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    system(saved.c_str());
 
-    cin >> image_address;
-    image.saveImage(image_address);
-
-    cout << endl << "Image saved in " << image_address << " successfully." << endl << endl;
+    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 }
+
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
 
-int invert_image(){
-    string image_address;
-    cout << endl << "# ===== Welcome to Invert Image Filter ===== #" << endl;
-    cout << "Please, Enter colored image name to turn to gray scale: ";
-    cin >> image_address;
-    string extension = image_address.substr(image_address.size()-4,4);
-    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-        Image image(image_address);
+void invert_image(string image_address) {
+    cout << endl << "\n# ===== Welcome to Invert Image Filter ===== #" << endl;
+    Image image(image_address);
 
-        for (int i = 0; i < image.width; ++i) {
-            for (int j = 0; j < image.height; ++j) {
-                for (int k = 0; k < 3; ++k) {
-                    image(i, j, k) = 255 - image(i, j, k);
-                }
+    // For inverting the image
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            for (int k = 0; k < 3; ++k) {
+                image(i, j, k) = 255 - image(i, j, k);
             }
-        }
-
-        while (true){
-            cout << "Please, Enter image name to store new image\n";
-            cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-            cin >> image_address;
-            extension = image_address.substr(image_address.size()-4,4);
-            if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-                image.saveImage(image_address);
-                cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
-                break;
-            }
-            else {cout << "The image's extension is incorrect." << endl;}
         }
     }
-    else {cout << "The image's extension is incorrect." << endl;}
-    return 0;
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    system(saved.c_str());
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
+
 // ========================================================>> Filter 4: Flip image <<================================================================ //
-void Flip_image(){    
+void Flip_image(string image_address) {
     string choice;
-    while(true){
-        while(true){
-            cout << "\n# ===== Welcome to Flip image filter ===== #\n";
+
+    while (true) {
+        
+        // To Check the menu choices
+        while (true) {
+            cout << "\n# ===== Welcome to Flip image Filter ===== #\n";
             cout << "How do you want to flip the image?\n [1] Horizontal flip.\n [2] Vertical flip.\n [3] Both flips \nEnter Your Choice:";
             getline(cin, choice);
 
             bool check = false;
-            for(int i = 1; i <= 3; i++){         // Checking of answer.
-                if(choice == to_string(i)){
+            for (int i = 1; i <= 3; i++) {         // Checking of answer.
+                if (choice == to_string(i)) {
                     check = true;
                     break;
                 }
             }
 
-            if(check)
+            if (check)
                 break;
             cout << "Invalid Choice. Try Again." << endl << endl;
         }
-
-        string image_address;
-        cout << endl << "Note enter the image with extenction .jpg, .bmp, .png, .tga" << endl ;
-        cout << "Enter the address of the image you want to edit : " ;
-        getline(cin, image_address);
-
         Image image(image_address);
 
-        if(choice == "2"){
-            for(int i = 0; i < image.width; i++) {
-                for (int j = 0; j < image.height/2; j++) {
-                    for(int k = 0; k < 3; k++) {
+        // Vertical Flip
+        if (choice == "2") {
+            for (int i = 0; i < image.width; i++) {
+                for (int j = 0; j < image.height / 2; j++) {
+                    for (int k = 0; k < 3; k++) {
                         int v = image(i, j, k);
-                        image(i, j, k) = image(i, image.height - j -1, k);
+                        image(i, j, k) = image(i, image.height - j - 1, k);
                         image(i, image.height - j - 1, k) = v;
                     }
                 }
             }
         }
-        else if (choice == "1"){
-            for(int i = 0; i < image.width/2; i++) {
+        
+        // Horizontal Flip
+        else if (choice == "1") {
+            for (int i = 0; i < image.width / 2; i++) {
                 for (int j = 0; j < image.height; j++) {
-                    for(int k = 0; k < 3; k++) {
-                        int v = image(i, j, k);
-                        image(i, j, k) = image(image.width - i, j, k);
-                        image(image.width - i, j, k) = v;
-                    }
-                }
-            }
-        }
-        else{
-            for(int i = 0; i < image.width; i++) {
-                for (int j = 0; j < image.height/2; j++) {
-                    for(int k = 0; k < 3; k++) {
-                        int v = image(i, j, k);
-                        image(i, j, k) = image(i, image.height - j -1, k);
-                        image(i, image.height - j -1, k) = v;
-                    }
-                }
-            }
-            for(int i = 0; i < image.width/2; i++) {
-                for (int j = 0; j < image.height; j++) {
-                    for(int k = 0; k < 3; k++) {
+                    for (int k = 0; k < 3; k++) {
                         int v = image(i, j, k);
                         image(i, j, k) = image(image.width - i, j, k);
                         image(image.width - i, j, k) = v;
@@ -201,208 +212,200 @@ void Flip_image(){
             }
         }
 
-        cout << "Please, Enter image name to store new image\n";
-        cout << "and specify extension .jpg, .bmp, .png, .tga: ";
+        // Both Flip
+        else {
+            for (int i = 0; i < image.width; i++) {
+                for (int j = 0; j < image.height / 2; j++) {
+                    for (int k = 0; k < 3; k++) {
+                        int v = image(i, j, k);
+                        image(i, j, k) = image(i, image.height - j - 1, k);
+                        image(i, image.height - j - 1, k) = v;
+                    }
+                }
+            }
+            for (int i = 0; i < image.width / 2; i++) {
+                for (int j = 0; j < image.height; j++) {
+                    for (int k = 0; k < 3; k++) {
+                        int v = image(i, j, k);
+                        image(i, j, k) = image(image.width - i, j, k);
+                        image(image.width - i, j, k) = v;
+                    }
+                }
+            }
+        }
 
-        getline(cin, image_address);
-        image.saveImage(image_address);
-        system(image_address.c_str());
+        string saved = savingWay(image_address);
+        image.saveImage(saved);
+        system(saved.c_str());
 
-        cout << endl << "Image saved in " << image_address << " successfully" << endl << endl;
-    
+        cout << endl << "Image saved in " << saved << " successfully" << endl << endl;
+
+        // To check if user wants to make another flip or not...
         cin.ignore(0, '\n');
-        while(true){
-            cout << "Do you want to make another flip?\n [1] Yes\n [2] No\n your choice :";
+        while (true) {
+            cout << "Do you want to make another flip?\n [1] Yes\n [2] No\nYour choice :";
             string choice;
-            getline(cin,choice);
-            if(choice == "1")
+            getline(cin, choice);
+            if (choice == "1")              // if yes
                 break;
-            else if(choice == "2")
+            else if (choice == "2")         // if no
                 return;
-            cout << "Please choose a valid option " << endl;  
+
+            // If he enter an invalid choice
+            cout << "Please choose a valid option " << endl;
         }
     }
 }
 
 // ========================================================>> Filter 5: Rotate Image <<======================================================== //
 
-void rotate_image(){
-    string image_address;
-    cout << endl << "# ===== Welcome to Rotate Image Filter ===== #" << endl;
-    cout << "Please, Enter colored image name to rotate it: ";
-    getline(cin, image_address);
-    string extension = image_address.substr(image_address.size()-4,4);
-    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-        Image image(image_address);
-        Image image2(image.height, image.width);
-        string choice;
-        while (true){
-            cout << "\nYou want to rotate this image clockwise by : .........\n";
-            cout << " [1] 90.\n [2] 180.\n [3] 270.\nEnter Your Choice: ";
-            cin >> choice;
+void rotate_image(string image_address) {
+    
+    cout << endl << "\n# ===== Welcome to Rotate Image Filter ===== #" << endl;
+    Image image(image_address);
+    Image image2(image.height, image.width);
+    string choice;
 
-            if (choice == "1"){
-                for (int i = 0; i < image.width; ++i) {
-                    for (int j = 0; j < image.height; ++j) {
-                        for (int k = 0; k < 3; ++k) {
-                            image2(image.height - j, i, k) = image(i, j, k);
-                        }
-                    }
-                }
-                while (true){
-                    cout << "\nPlease, Enter image name to store new image\n";
-                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-                    cin >> image_address;
-                    extension = image_address.substr(image_address.size()-4,4);
-                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-                        image2.saveImage(image_address);
-                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
-                        system(image_address.c_str());
-                        break;
-                    }
-                    else {cout << "The image's extension is incorrect." << endl;}
-                }
-                break;
-            }
-
-            else if (choice == "2")
-            {
-                for(int i = 0; i < image.width/2; i++) {
-                    for (int j = 0; j < image.height; j++) {
-                        for(int k = 0; k < 3; k++) {
-                            int v = image(i, j, k);
-                            image(i, j, k) = image(image.width - i, j, k);
-                            image(image.width - i, j, k) = v;
-                        }
-                    }
-                }
-                for(int i = 0; i < image.width; i++) {
-                    for (int j = 0; j < image.height/2; j++) {
-                        for(int k = 0; k < 3; k++) {
-                            int v = image(i, j, k);
-                            image(i, j, k) = image(i, image.height - j -1, k);
-                            image(i, image.height - j -1, k) = v;
-                        }
-                    }
-                }
-                while (true){
-                    cout << "\nPlease, Enter image name to store new image\n";
-                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-                    cin >> image_address;
-                    extension = image_address.substr(image_address.size()-4,4);
-                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-                        image.saveImage(image_address);
-                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
-                        system(image_address.c_str());
-                        break;
-                    }
-                    else {cout << "The image's extension is incorrect." << endl;}
-                }
-                break;
-            }
-
-            else if (choice == "3")
-            {
-                for (int i = 0; i < image.width; ++i) {
-                    for (int j = 0; j < image.height; ++j) {
-                        for (int k = 0; k < 3; ++k) {
-                            image2(j, i, k) = image(image.width - i, j, k);
-                        }
-                    }
-                }
-                while (true){
-                    cout << "\nPlease, Enter image name to store new image\n";
-                    cout << "and specify extension .jpg, .bmp, .png, .tga: ";
-                    getline(cin, image_address);
-                    extension = image_address.substr(image_address.size()-4,4);
-                    if (extension == ".jpg" || extension == ".bmp" || extension == ".png" || extension == ".tga"){
-                        image2.saveImage(image_address);
-                        cout << "\nImage saved in " << image_address <<" successfully.\n" << endl;
-                        system(image_address.c_str());
-                        break;
-                    }
-                    else {cout << "The image's extension is incorrect." << endl;}
-                }
+    // To check the menu choices
+    while (true) {
+        cout << "\nYou want to rotate this image clockwise by : .........\n";
+        cout << " [1] 90.\n [2] 180.\n [3] 270.\nEnter Your Choice: ";
+        getline(cin, choice);
+        bool check = false;
+        for (int i = 1; i <= 3; i++) {         // Checking of answer.
+            if (choice == to_string(i)) {
+                check = true;
                 break;
             }
         }
+
+        if (check)
+            break;
+        cout << "Invalid Choice. Try Again." << endl << endl;
     }
-    else {cout << "The image's extension is incorrect." << endl;}
+
+    // 90 Degree clockwise Rotations
+    if (choice == "1") {
+        for (int i = 0; i < image.width; ++i) {
+            for (int j = 0; j < image.height; ++j) {
+                for (int k = 0; k < 3; ++k) {
+                    image2(image.height - j, i, k) = image(i, j, k);
+                }
+            }
+        }
+    }
+
+    // 180 Degree clockwise Rotations
+    else if (choice == "2"){
+        for (int i = 0; i < image.width / 2; i++) {
+            for (int j = 0; j < image.height; j++) {
+                for (int k = 0; k < 3; k++) {
+                    int v = image(i, j, k);
+                    image(i, j, k) = image(image.width - i, j, k);
+                    image(image.width - i, j, k) = v;
+                }
+            }
+        }
+        for (int i = 0; i < image.width; i++) {
+            for (int j = 0; j < image.height / 2; j++) {
+                for (int k = 0; k < 3; k++) {
+                    int v = image(i, j, k);
+                    image(i, j, k) = image(i, image.height - j - 1, k);
+                    image(i, image.height - j - 1, k) = v;
+                }
+            }
+        }
+    }
+
+    // 270 Degree clockwise Rotations
+    else if (choice == "3"){
+        for (int i = 0; i < image.width; ++i) {
+            for (int j = 0; j < image.height; ++j) {
+                for (int k = 0; k < 3; ++k) {
+                    image2(j, i, k) = image(image.width - i, j, k);
+                }
+            }
+        }
+    }
+
+    string saved = savingWay(image_address);
+    image2.saveImage(saved);
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+    system(saved.c_str());
 }
 // ===============================================================>> Main Application <<=============================================================== //
 
-int main(){
+int main() {
     // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
     cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
     cout << "    invert image filter," << endl;
     cout << "===================================================================================================" << endl;
+    string nameimage;
+    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+    cout << "please enter the photo : ";
+    getline(cin, nameimage);
+    nameimage = validationpart1(nameimage);
 
     // To keep the program running.
-    while (true){
+    while (true) {
+        // Menu choice to check of it
         string choice_menu;
-        while(true){
-            // Menu choice to check of it
-            cout << "Choose One Of This Filters:-" << endl;
+        while (true) {
+            cout << "\nChoose One Of This Filters:-" << endl;
             cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image.\n [5] Rotate Image.\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
-            for(int i = 1; i <= 7; i++){         // Checking of answer.
-                if(choice_menu == to_string(i)){
+            for (int i = 1; i <= 6; i++) {         // Checking of answer.
+                if (choice_menu == to_string(i)) {
                     check = true;
                     break;
                 }
             }
 
-            if(check)
+            if (check)
                 break;
             cout << "Invalid Choice. Try Again." << endl << endl;
         }
 
         // Gray scale filter
-        if (choice_menu == "1"){
-            grayscale_conversion();
-        }
+        if (choice_menu == "1") 
+            grayscale_conversion(nameimage);
 
-            // Black and White filter
-        else if (choice_menu == "2"){
-            black_and_white();
-        }
+        // Black and White filter
+        else if (choice_menu == "2")
+            black_and_white(nameimage);
 
-            // Invert Image filter
-        else if (choice_menu == "3"){
-            invert_image();
-        }
+        // Invert Image filter
+        else if (choice_menu == "3")
+            invert_image(nameimage);
 
-            // Flip filter
-        else if (choice_menu == "4"){
-            Flip_image();
-        }
+        // Flip filter
+        else if (choice_menu == "4") 
+            Flip_image(nameimage);
 
-            // Rotate filter
-        else if (choice_menu == "5"){
-            rotate_image();
-        }
+        // Rotate filter
+        else if (choice_menu == "5") 
+            rotate_image(nameimage);
 
-            // To exit program
-        else if (choice_menu == "6"){
+        // To exit program
+        else if (choice_menu == "6") {
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
             break;
         }
 
-        cin.ignore(1,'\n');
         // Continue a menu to see if user wants to continue or exit the program.
-        while (true){
+        while (true) {
             cout << "Do You Want To Continue?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
             string choice;
-            cin >> choice;
+            getline(cin, choice);
 
             if (choice == "1")              // If he wants to continue
                 break;
 
-            else if (choice == "2"){        // If he doesn't
+            else if (choice == "2") {        // If he doesn't
                 cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
                 return 0;
             }
@@ -411,19 +414,22 @@ int main(){
             cout << "Invalid Choice. Try Again." << endl;
         }
 
-        cin.ignore(1,'\n');
         // To see if a user wants to change a photo or not
-        while(true) {
+        while (true) {
             cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
             string choice1;
             getline(cin, choice1);
 
-            if (choice1 == "1"){              // If he wants to
-            }
-
-            else if (choice1 == "2"){        // If he doesn't
+            if (choice1 == "1") {              // If he wants to
+                cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+                cout << "please enter the photo\n";
+                getline(cin, nameimage);
+                nameimage = validationpart1(nameimage);
                 break;
             }
+
+            else if (choice1 == "2")          // If he doesn't
+                break;
 
             // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
