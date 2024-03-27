@@ -71,7 +71,6 @@ string savingWay(string originname){
     }
     string nameOfSavedImage;
     if (choice == "1") {
-        //string nameOfSavedImage;
         cout << "The filename should end with the extension (.jpg or.png or.bmg or.tga)\n";
         cout << "Enter the name of the new image: ";
         getline(cin, nameOfSavedImage);
@@ -103,7 +102,6 @@ void grayscale_conversion(string nameimage) {
     }
     string saved = savingWay(nameimage);
     image.saveImage(saved);
-    system(saved.c_str());
     cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 }
 
@@ -133,7 +131,6 @@ void black_and_white(string image_address) {
     }
     string saved = savingWay(image_address);
     image.saveImage(saved);
-    system(saved.c_str());
 
     cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 }
@@ -236,7 +233,6 @@ void Flip_image(string image_address) {
 
         string saved = savingWay(image_address);
         image.saveImage(saved);
-        system(saved.c_str());
 
         cout << endl << "Image saved in " << saved << " successfully" << endl << endl;
 
@@ -261,10 +257,11 @@ void Flip_image(string image_address) {
 
 void rotate_image(string image_address) {
     
-    cout << endl << "\n# ===== Welcome to Rotate Image Filter ===== #" << endl;
+    cout << endl << "# ===== Welcome to Rotate Image Filter ===== #" << endl;
     Image image(image_address);
     Image image2(image.height, image.width);
     string choice;
+    bool valid = false;
 
     // To check the menu choices
     while (true) {
@@ -315,6 +312,7 @@ void rotate_image(string image_address) {
                 }
             }
         }
+        valid = true;
     }
 
     // 270 Degree clockwise Rotations
@@ -327,11 +325,12 @@ void rotate_image(string image_address) {
             }
         }
     }
-
     string saved = savingWay(image_address);
-    image2.saveImage(saved);
+    if(valid)
+        image.saveImage(saved);
+    else
+        image2.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
-    system(saved.c_str());
 }
 // ===============================================================>> Main Application <<=============================================================== //
 
