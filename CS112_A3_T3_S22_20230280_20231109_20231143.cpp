@@ -48,7 +48,7 @@ string validationpart2(string nameOfSavedImage) {
     }
     string extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
 
-    while (extension != ".jpg" && extension != ".png" && extension != ".bmg" && extension != ".tga"){
+    while (extension != ".jpg" && extension != ".png" && extension != ".bmp" && extension != ".jpeg"){
         cout << "Please enter the name of the image with correct extension : ";
         getline(cin, nameOfSavedImage);
         while (nameOfSavedImage.size() <= 4) {
@@ -71,7 +71,7 @@ string savingWay(string originname){
     }
     string nameOfSavedImage;
     if (choice == "1") {
-        cout << "The filename should end with the extension (.jpg or.png or.bmg or.tga)\n";
+        cout << "The filename should end with the extension (.jpg or.png or.bmp or.jpeg)\n";
         cout << "Enter the name of the new image: ";
         getline(cin, nameOfSavedImage);
         nameOfSavedImage = validationpart2(nameOfSavedImage);
@@ -342,7 +342,7 @@ int main() {
     cout << "    invert image filter, Fliping image filter and Rotating image filter and we will add another filters soon." << endl;
     cout << "===================================================================================================" << endl;
     string nameimage;
-    cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+    cout << "the filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
     cout << "please enter the photo : ";
     getline(cin, nameimage);
     nameimage = validationpart1(nameimage);
@@ -420,7 +420,7 @@ int main() {
             getline(cin, choice1);
 
             if (choice1 == "1") {              // If he wants to
-                cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
+                cout << "the filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
                 cout << "please enter the photo\n";
                 getline(cin, nameimage);
                 nameimage = validationpart1(nameimage);
