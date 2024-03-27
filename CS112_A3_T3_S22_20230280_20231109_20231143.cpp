@@ -1,8 +1,8 @@
 /*
---> Name: CS112_A3_T3_S22_20230280_20231109_20231143.cpp
+--> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
-             in this once there is a 5 different filters that are : graysale filter, black and white filter,
-             invert image filter,
+             in this once there is a 5 different filters that are : Gray Scale filter, Black and White filter,
+             invert image filter, Flip image filter, Rotation image filter and we will soon makeing a new filters
 
 --> Author of (1, 4, 7, 10) filters: Fatema El-Zhraa Ahmed Mohamed El-Fiky.             (ID:20230280)         (Section : S22)
 --> Email : fatmaelfeky922@gmail.com
@@ -339,7 +339,7 @@ int main() {
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
     cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
-    cout << "    invert image filter," << endl;
+    cout << "    invert image filter, Fliping image filter and Rotating image filter and we will add another filters soon." << endl;
     cout << "===================================================================================================" << endl;
     string nameimage;
     cout << "the filename should end with the extension .jpg or.png or.bmg or.tga\n";
