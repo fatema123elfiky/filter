@@ -48,8 +48,8 @@ string validationpart2(string nameOfSavedImage) {
     }
     string extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
 
-    while (extension != ".jpg" && extension != ".png" && extension != ".bmp" && extension != ".jpeg"){
-        cout << "Please enter the name of the image with correct extension : ";
+    while (extension != ".jpg" && extension != ".png" && extension != ".bmp" && extension != "jpeg") {
+        cout << "Please enter the name of the image with correct extension and suitable size: ";
         getline(cin, nameOfSavedImage);
         while (nameOfSavedImage.size() <= 4) {
             cout << "The name is too short enter again : ";
@@ -57,7 +57,33 @@ string validationpart2(string nameOfSavedImage) {
         }
         extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
     }
+    while (extension == "jpeg") {
+        if (nameOfSavedImage[nameOfSavedImage.size() - 5] != '.' || nameOfSavedImage.size() <= 5) {
+            cout << "Please enter the name of the image with correct extension and suitable size : ";
+            getline(cin, nameOfSavedImage);
+            while (nameOfSavedImage.size() <= 4) {
+                cout << "The name is too short enter again : ";
+                getline(cin, nameOfSavedImage);
+            }
+            string extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
+
+            while (extension != ".jpg" && extension != ".png" && extension != ".bmp" && extension != "jpeg") {
+                cout << "Please enter the name of the image with correct extension and suitable size : ";
+                getline(cin, nameOfSavedImage);
+                while (nameOfSavedImage.size() <= 4) {
+                    cout << "The name is too short enter again : ";
+                    getline(cin, nameOfSavedImage);
+                }
+                extension = nameOfSavedImage.substr(nameOfSavedImage.size() - 4);
+            }
+        }
+        else {
+            break;
+        }
+
+    }
     return nameOfSavedImage;
+
 }
 
 
