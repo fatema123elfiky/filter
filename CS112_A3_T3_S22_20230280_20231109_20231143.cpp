@@ -1,8 +1,8 @@
 /*
 --> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
-             in this once there is a 5 different filters that are : Gray Scale filter, Black and White filter,
-             invert image filter, Flip image filter, Rotation image filter and we will soon makeing a new filters
+             in this once there is 5 different filters that are : Gray Scale filter, Black and White filter,
+             invert image filter, Flip image filter, Rotation image filter, and we will soon make a new filters.
 
 --> Author of (1, 4, 7, 10) filters: Fatema El-Zhraa Ahmed Mohamed El-Fiky.             (ID:20230280)         (Section : S22)
 --> Email : fatmaelfeky922@gmail.com
@@ -13,22 +13,23 @@
 --> Author of (3, 6, 9. 12) filters: Mohammed Atef Abd EL-Kader Bayomi.                 (ID:20231143)         (Section : S22)
 --> Email : mohamed45452020@gmail.com
 ======================================================================================================================================================================= */
-// Definging liberary
+
+// Defining libraries.
 #include <bits/stdc++.h>
 #include "Image_Class.h"
 #include <fstream>
 #define ll long long
 using namespace std;
 
-// Defining some functions
-// To check the existence of image 
+// Defining some functions.
+// To check the existence of image.
 string validationpart1(string nameimage) {
     while (true){
         ifstream file_stream(nameimage);
         try {
             if (file_stream.is_open())
                 break;
-            else 
+            else
                 throw std::runtime_error("File is not exist , pls enter again\n");
         }
         catch (const std::exception& e) {
@@ -40,7 +41,7 @@ string validationpart1(string nameimage) {
 }
 
 
-// To check if the name of photo is valid and extension
+// To check if the name of the photo is valid and extension.
 string validationpart2(string nameOfSavedImage) {
     while (nameOfSavedImage.size() <= 4) {
         cout << "The name is too short enter again : ";
@@ -83,12 +84,11 @@ string validationpart2(string nameOfSavedImage) {
 
     }
     return nameOfSavedImage;
-
 }
 
 
 string savingWay(string originname){
-    cout << "Do you like to save in new image or the same one?\n [1] Save in new image\n [2] Save in the same picture\nYour choice: ";
+    cout << "Do you like to save in new image or the same one?\n [1] Save in new image.\n [2] Save in the same picture.\nEnter Your Choice: ";
     string choice;
     getline(cin, choice);
     while (choice != "1" && choice != "2") {
@@ -131,8 +131,8 @@ void grayscale_conversion(string nameimage) {
     cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 }
 
-
 // ========================================================>> Filter 2: Black and White <<============================================================ //
+
 void black_and_white(string image_address) {
     cout << endl << "\n# ===== Welcome to Black and White Filter ===== #" << endl;
     Image image(image_address);
@@ -161,7 +161,6 @@ void black_and_white(string image_address) {
     cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 }
 
-
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
 
 void invert_image(string image_address) {
@@ -182,17 +181,17 @@ void invert_image(string image_address) {
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-
 // ========================================================>> Filter 4: Flip image <<================================================================ //
+
 void Flip_image(string image_address) {
     string choice;
 
     while (true) {
-        
-        // To Check the menu choices
+
+        // To Check the menu choices.
         while (true) {
             cout << "\n# ===== Welcome to Flip image Filter ===== #\n";
-            cout << "How do you want to flip the image?\n [1] Horizontal flip.\n [2] Vertical flip.\n [3] Both flips \nEnter Your Choice:";
+            cout << "How do you want to flip the image?\n [1] Horizontal flip.\n [2] Vertical flip.\n [3] Both flips. \nEnter Your Choice:";
             getline(cin, choice);
 
             bool check = false;
@@ -209,7 +208,7 @@ void Flip_image(string image_address) {
         }
         Image image(image_address);
 
-        // Vertical Flip
+        // Vertical Flip.
         if (choice == "2") {
             for (int i = 0; i < image.width; i++) {
                 for (int j = 0; j < image.height / 2; j++) {
@@ -221,8 +220,8 @@ void Flip_image(string image_address) {
                 }
             }
         }
-        
-        // Horizontal Flip
+
+            // Horizontal Flip.
         else if (choice == "1") {
             for (int i = 0; i < image.width / 2; i++) {
                 for (int j = 0; j < image.height; j++) {
@@ -235,7 +234,7 @@ void Flip_image(string image_address) {
             }
         }
 
-        // Both Flip
+            // Both Flip.
         else {
             for (int i = 0; i < image.width; i++) {
                 for (int j = 0; j < image.height / 2; j++) {
@@ -282,14 +281,14 @@ void Flip_image(string image_address) {
 // ========================================================>> Filter 5: Rotate Image <<======================================================== //
 
 void rotate_image(string image_address) {
-    
+
     cout << endl << "# ===== Welcome to Rotate Image Filter ===== #" << endl;
     Image image(image_address);
     Image image2(image.height, image.width);
     string choice;
     bool valid = false;
 
-    // To check the menu choices
+    // To check the menu choices.
     while (true) {
         cout << "\nYou want to rotate this image clockwise by : .........\n";
         cout << " [1] 90.\n [2] 180.\n [3] 270.\nEnter Your Choice: ";
@@ -307,7 +306,7 @@ void rotate_image(string image_address) {
         cout << "Invalid Choice. Try Again." << endl << endl;
     }
 
-    // 90 Degree clockwise Rotations
+    // 90 Degree clockwise Rotations.
     if (choice == "1") {
         for (int i = 0; i < image.width; ++i) {
             for (int j = 0; j < image.height; ++j) {
@@ -318,7 +317,7 @@ void rotate_image(string image_address) {
         }
     }
 
-    // 180 Degree clockwise Rotations
+        // 180 Degree clockwise Rotations.
     else if (choice == "2"){
         for (int i = 0; i < image.width / 2; i++) {
             for (int j = 0; j < image.height; j++) {
@@ -341,7 +340,7 @@ void rotate_image(string image_address) {
         valid = true;
     }
 
-    // 270 Degree clockwise Rotations
+        // 270 Degree clockwise Rotations.
     else if (choice == "3"){
         for (int i = 0; i < image.width; ++i) {
             for (int j = 0; j < image.height; ++j) {
@@ -358,18 +357,21 @@ void rotate_image(string image_address) {
         image2.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
+
+
 // ===============================================================>> Main Application <<=============================================================== //
+
 
 int main() {
     // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
     cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
-    cout << "    invert image filter, Fliping image filter and Rotating image filter and we will add another filters soon." << endl;
+    cout << "    invert image filter, Flipping image filter and Rotating image filter and we will add another filters soon." << endl;
     cout << "===================================================================================================" << endl;
     string nameimage;
-    cout << "the filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
-    cout << "please enter the photo : ";
+    cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
+    cout << "Please, Enter the photo : ";
     getline(cin, nameimage);
     nameimage = validationpart1(nameimage);
 
@@ -379,7 +381,7 @@ int main() {
         string choice_menu;
         while (true) {
             cout << "\nChoose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image colours.\n [4] Flip Image.\n [5] Rotate Image.\n [6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Flip Image.\n [5] Rotate Image.\n [6] Exit Application.\nEnter Your Choice:";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -396,26 +398,26 @@ int main() {
         }
 
         // Gray scale filter
-        if (choice_menu == "1") 
+        if (choice_menu == "1")
             grayscale_conversion(nameimage);
 
-        // Black and White filter
+            // Black and White filter
         else if (choice_menu == "2")
             black_and_white(nameimage);
 
-        // Invert Image filter
+            // Invert Image filter
         else if (choice_menu == "3")
             invert_image(nameimage);
 
-        // Flip filter
-        else if (choice_menu == "4") 
+            // Flip filter
+        else if (choice_menu == "4")
             Flip_image(nameimage);
 
-        // Rotate filter
-        else if (choice_menu == "5") 
+            // Rotate filter
+        else if (choice_menu == "5")
             rotate_image(nameimage);
 
-        // To exit program
+            // To exit program
         else if (choice_menu == "6") {
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
             break;
@@ -446,8 +448,8 @@ int main() {
             getline(cin, choice1);
 
             if (choice1 == "1") {              // If he wants to
-                cout << "the filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
-                cout << "please enter the photo\n";
+                cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
+                cout << "Please, Enter the photo\n";
                 getline(cin, nameimage);
                 nameimage = validationpart1(nameimage);
                 break;
