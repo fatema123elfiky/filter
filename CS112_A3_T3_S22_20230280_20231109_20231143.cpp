@@ -358,6 +358,123 @@ void rotate_image(string image_address) {
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
+// ========================================================>> Filter 9: Adding a Frame to the Picture <<======================================================== //
+
+void adding_a_frame(string image_address){
+    cout << "\n# ===== Welcome to the Adding a Frame to the Picture Filter ===== #\n";
+    Image image(image_address);
+    ll Min = min(image.height, image.width);
+    Image image1(image.width+(Min*0.02), image.height+(Min*0.02));
+    string ch_colour, frame;
+    while (true){
+        cout << "What colour do you want?\n"
+                " [1] Red.                         [2] Blue.\n"
+                " [3] Green.                       [4] Yellow.\n"
+                " [5] Cyan.                        [6] Magenta.\n"
+                " [7] White.                       [8] Black.\n"
+                "Enter Your Choice:";
+        getline(cin, ch_colour);
+
+        bool check = false;
+        for (int i = 1; i <= 8; i++) {         // Checking of answer.
+            if (ch_colour == to_string(i)) {
+                check = true;
+                break;
+            }
+        }
+
+        if (check)
+            break;
+        cout << "Invalid Choice. Try Again." << endl << endl;
+    }
+
+    cout << endl;
+
+    while (true){
+        cout << "What frame do you want?\n"
+                " [1] Simple frame.\n [2] Fancy frame.\n"
+                "Enter Your Choice:";
+        getline(cin, frame);
+
+        bool check = false;
+        for (int i = 1; i <= 2; i++) {         // Checking of answer.
+            if (frame == to_string(i)) {
+                check = true;
+                break;
+            }
+        }
+
+        if (check)
+            break;
+        cout << "Invalid Choice. Try Again." << endl << endl;
+    }
+
+    cout << endl;
+    for (int i = 0; i < image1.width; i++) {
+        for (int j = 0; j < image1.height; j++) {
+            for (int k = 0; k < 3; ++k) {
+                if ((i <= (Min*0.02) || j <= (Min*0.02) || i >= image1.width-(Min*0.02) || j >= image1.height-(Min*0.02)) && (frame == "1" || frame == "2")){         // Simple Frame.
+                    if (ch_colour == "1"){
+                        image1(i,j, 0) = 255;
+                        image1(i,j, 1) = 0;
+                        image1(i,j, 2) = 0;
+                    }
+                    else if (ch_colour == "2"){
+                        image1(i,j, 0) = 0;
+                        image1(i,j, 1) = 0;
+                        image1(i,j, 2) = 255;
+                    }
+                    else if (ch_colour == "3"){
+                        image1(i,j, 0) = 0;
+                        image1(i,j, 1) = 255;
+                        image1(i,j, 2) = 0;
+                    }
+                    else if (ch_colour == "4"){
+                        image1(i,j, 0) = 255;
+                        image1(i,j, 1) = 255;
+                        image1(i,j, 2) = 0;
+                    }
+                    else if (ch_colour == "5"){
+                        image1(i,j, 0) = 0;
+                        image1(i,j, 1) = 255;
+                        image1(i,j, 2) = 255;
+                    }
+                    else if (ch_colour == "6"){
+                        image1(i,j, 0) = 255;
+                        image1(i,j, 1) = 0;
+                        image1(i,j, 2) = 255;
+                    }
+                    else if (ch_colour == "7"){
+                        image1(i,j, 0) = 255;
+                        image1(i,j, 1) = 255;
+                        image1(i,j, 2) = 255;
+                    }
+                    else if (ch_colour == "8"){
+                        image1(i,j, 0) = 0;
+                        image1(i,j, 1) = 0;
+                        image1(i,j, 2) = 0;
+                    }
+                }
+                  // Fancy Frame.
+                else if (((i >= (Min*0.02) && i <= (Min*0.02)*1.45) || (j >= (Min*0.02) && j <= (Min*0.02)*1.45) || (i <= image1.width-(Min*0.02) && i >= (image1.width-(Min*0.02)*1.45)) || (j <= image1.height-(Min*0.02) && j >= (image1.height-(Min*0.02)*1.45))) && frame == "2"){
+                    image1(i,j,k) = 235;
+                }
+                else if (((i >= (Min*0.02)*2 && i <= (Min*0.02)*2.25) || (j >= (Min*0.02)*2 && j <= (Min*0.02)*2.25) || (i <= image1.width-((Min*0.02)*2) && i >= image1.width-((Min*0.02)*2.25)) || (j <= image1.height-((Min*0.02)*2) && j >= image1.height-((Min*0.02)*2.25))) && frame == "2"){
+                    image1(i,j,k) = 225;
+                    image1(i,j,k) = 225;
+                    image1(i,j,k) = 225;
+                }
+                else {image1(i,j,k) = image(i,j,k);}
+            }
+        }
+    }
+
+    string saved = savingWay(image_address);
+    image1.saveImage(saved);
+    system(saved.c_str());
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
+
 
 // ===============================================================>> Main Application <<=============================================================== //
 
