@@ -491,6 +491,28 @@ void look_puple(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
+// ==================================>> Filter 17: Samurais are passionate about capturing the world in infrared photography <<================================== //
+
+void infrared(string image_address){
+    cout << "\n# ===== Welcome to the Infrared Photography Filter ===== #\n";
+    Image image(image_address);
+    
+    for (int i = 0; i < image.width; i++){
+        for (int j = 0; j < image.height; j++){
+            for (int k = 0; k < 3; k++){
+                image(i, j, 0) = 252;
+                image (i,j,1) = 255 - image (i,j,1);
+                image (i,j,2) = 255 - image (i,j,2);
+            }
+        }
+    }
+
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    system(saved.c_str());
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
+
 
 // ===============================================================>> Main Application <<=============================================================== //
 
