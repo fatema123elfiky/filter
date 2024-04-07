@@ -475,6 +475,25 @@ void adding_a_frame(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
+// ========================================>> Filter 13: Wano doesn’t have good natural sunlight. Can you fix that? <<======================================== //
+
+void natural_sunlight(string image_address){
+    cout << "\n# ===== Welcome to the Natural Sunlight Filter ===== #\n";
+    Image image(image_address);
+
+    for (int i = 0; i < image.width; i++){
+        for (int j = 0; j < image.height; j++){
+            for (int k = 0; k < 3; k++){
+                image (i,j,2) *= 0.888;
+            }
+        }
+    }
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    system(saved.c_str());
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
+
 // ==============================================>> Filter 16: Wano looks so purple at night can you make Luffy look purple? <<================================================== //
 
 void look_puple(string image_address){
