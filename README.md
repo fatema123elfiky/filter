@@ -8,7 +8,11 @@
 --> Fatema El-Zahra (El-Fiky).
 ## Filters Type 🫧
 -  Grayscale Filter.
--  Black and white filter
--  invert filter
--  Flip image filter
--  Rotating Image filter
+-  Black and white filter.
+-  Invert filter.
+-  Flip image filter.
+-  Rotating Image filter.
+-  Adding a frame filter.
+-  Look Purple filter.
+-  Infrared filter.
+-  Natural Sunlight filter.
