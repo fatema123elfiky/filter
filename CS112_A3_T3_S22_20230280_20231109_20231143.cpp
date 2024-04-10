@@ -915,6 +915,7 @@ void detect_edges(string photo)
                     }
                 }
             }
+            avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5=0;
         }
     }
     string saved = savingWay(photo);
