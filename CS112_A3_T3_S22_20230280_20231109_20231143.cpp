@@ -107,6 +107,26 @@ string savingWay(string originname){
     return nameOfSavedImage;
 }
 
+// To get number and check on it
+ll get_num(ll condition, ll x = 0){
+    string num;
+    while(true){
+        bool check = true;
+        getline(cin, num);
+        for(ll i = 0; i < num.length();i++){
+            if(!isdigit(num[i])){
+                check = false;
+                break;
+            }
+        }
+        if(check &&( stoll(num) + x <= condition)){
+            return stoll(num);
+        }
+        cout << "Please, Enter a right postive number that is inside the image: ";
+    }
+}
+
+
 // ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
 
 void grayscale_conversion(string nameimage) {
@@ -357,6 +377,45 @@ void rotate_image(string image_address) {
         image2.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
+
+//=========================================================>>Filter 6:Crop image filter<<===============================================================//
+void crop_image(string image_address){
+    Image img(image_address);
+    // To show the user image data
+    cout << endl << "# ===== Welcome to Crop Image Filter ===== #" << endl;
+    cout << "Image Height is : " << img.height << endl;
+    cout << "Image Width is : " << img.width << endl;
+    
+    // to take the crop image data from user
+    ll x, y, new_height, new_width;
+    cout << "Please, Enter the X that you want to crop from : ";
+    x = get_num(img.width);
+    cout << "Please, Enter the Y that you want to crop from : ";
+    y = get_num(img.height);
+    cout << "Please, Enter the width of photo : ";
+    new_width = get_num(img.width, x);
+    cout << "Please, Enter the height of photo : ";
+    new_height = get_num(img.height, y);
+
+    // Crop functionality
+    Image image(new_width, new_height);
+    ll image_width = 0;
+    for(ll n = x; n < x + new_height; n++){
+        ll image_length = 0;
+        for(ll m = y; m < y + new_width; m++){
+            for(ll k = 0 ; k < 3; k++)
+                image(image_length, image_width, k) = img(m, n, k);
+            image_length++;
+        }
+        image_width++;
+    }
+
+    // To save image
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
+
 //=========================================================>>Filter 7:Lighten And Darken <<===============================================================//
 void Lighten_Darken(string nameimage) {
     //vaildation for files and the saved name is missed
@@ -863,6 +922,63 @@ void detect_edges(string photo)
     cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
 
 }
+
+//=========================================================>>Filter 11: Resize Image filter<<===============================================================//
+void resize_filter(string image_address){
+    Image img(image_address);
+    // To show the user image data
+    cout << endl << "# ===== Welcome to Resize Image Filter ===== #" << endl;
+    cout << "Image Height is : " << img.height << endl;
+    cout << "Image Width is : " << img.width << endl;
+    
+    // to see how would user enter the resize dimention of image
+    string choice;
+    while (true){
+        cout << "What do you want new image to be? \n [1] With a new dimintion for the image \n [2] its size increase by a certain percentage\nYour choice :";
+        getline(cin, choice);
+        if(choice == "1" || choice == "2")
+            break;
+        cout << endl <<"Please, Enter a valid option!" << endl;
+    }
+
+    double image_width, image_height, change_width, change_height, percentage_change_w, percentage_change_h;
+    // if he want to enter new dimintion 
+    if(choice == "1"){
+        cout << "Please, Enter the new width of the image : ";
+        image_width = get_num(LONG_LONG_MAX);
+        cout << "Please, Enter the new height of the image : ";
+        image_height = get_num(LONG_LONG_MAX);
+    }
+
+    // if he want to increase the size of image by a certain percentage
+    else{
+        cout << "Please, Enter the percentage change of the image width (from 100%) : ";
+        percentage_change_w = get_num(LONG_LONG_MAX);
+        cout << "Please, Enter the percentage change of the image height (from 100%) : ";
+        percentage_change_h = get_num(LONG_LONG_MAX);
+        image_width = img.width * percentage_change_w / 100;
+        image_height = img.height * percentage_change_h / 100;
+    }
+
+    // percentage of change
+    change_width = img.width/image_width;
+    change_height = img.height/image_height;
+
+    // Resize image function
+    Image image(image_width, image_height);
+    for(double i = 0; i < image_height; i++){
+        for(double j = 0; j < image_width; j++){
+            for(int k = 0 ; k < 3; k++)
+                image(j, i, k) = img(round(j*change_width), round(i*change_height), k);
+        }
+    }
+    
+    // To save image
+    string saved;//savingWay(image_address);
+    cin >> saved ;
+    image.saveImage(saved);
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+} 
 
 // ========================================>> Filter 13: Wano doesn’t have good natural sunlight. Can you fix that? <<======================================== //
 
