@@ -357,7 +357,53 @@ void rotate_image(string image_address) {
         image2.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
+//=========================================================>>Filter 7:Lighten And Darken <<===============================================================//
+void Lighten_Darken(string nameimage) {
+    //vaildation for files and the saved name is missed
+    cout << "===========\"Welcome to lighten and darken filter\"=============\n";
+    cout << "pls enter the image name\n";
+    Image image(nameimage);
+    cout << "[1]Darken filter\n[2]Lighten filter\nEnter your choice\n";
+    string choice11;
+    getline(cin, choice11);
+    //////validation
+    while (choice11 != "1" && choice11 != "2") {
+        cout << "Enter a valid choice\n";
+        getline(cin, choice11);
+    }
+    if (choice11 == "1")
+    {
+        for (int i = 0; i < image.width; i++)
+        {
+            for (int j = 0; j < image.height; j++)
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    image(i, j, k) = image(i, j, k) / 2;
+                }
+            }
+        }
 
+    }
+    else {
+        for (int i = 0; i < image.width; i++)
+        {
+            for (int j = 0; j < image.height; j++)
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    image(i, j, k) = min(image(i, j, k) * 2, 255);
+
+                }
+            }
+        }
+
+    }
+    string saved = savingWay(nameimage);
+    image.saveImage(saved);
+    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
+
+}
 // ========================================================>> Filter 9: Adding a Frame to the Picture <<======================================================== //
 
 void adding_a_frame(string image_address){
@@ -473,6 +519,349 @@ void adding_a_frame(string image_address){
     image1.saveImage(saved);
     system(saved.c_str());
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
+//==============================================>> Filter 10 : Detect edges 'there is a question if the line is thick or thin ??'<<==============================//
+void detect_edges(string photo)
+{
+    cout << "==========\"Welcome to detect edges filter\"=============\n";
+    cout << "Please enter the photo\n";
+    //string photo;
+    //getline(cin, photo);
+    Image image(photo);
+    Image image2(image.width, image.height);
+    // the idea of  black and white filter
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int average = 0;
+            for (int k = 0; k < 3; k++)
+                average += image(i, j, k);
+            if (average / 3 > 124) {
+                image(i, j, 0) = 255;
+                image(i, j, 1) = 255;
+                image(i, j, 2) = 255;
+            }
+            else {
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
+            }
+        }
+    }
+    // the idea of the detect
+    float avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5 = 0;
+    for (int i = 0; i < image.width; i++)
+    {
+        for (int j = 0; j < image.height; j++)
+        {
+            if (i == 0 && j == 0) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j + 1, k);
+                }avg4 = avg4 / 3;
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+
+            }
+            else if (i == 0 && j == image.height - 1) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j - 1, k);
+                }avg4 = avg4 / 3;
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (i == image.width - 1 && j == 0) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i - 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j + 1, k);
+                }avg4 = avg4 / 3;
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (i == image.width - 1 && j == image.height - 1) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j - 1, k);
+                }avg4 = avg4 / 3;
+
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (i == 0) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg2 += image(i, j + 1, k);
+                }
+                avg2 = avg2 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j - 1, k);
+                }avg4 = avg4 / 3;
+
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127 || fabs(avg - avg2) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (i == image.width - 1) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg2 += image(i, j + 1, k);
+                }
+                avg2 = avg2 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i - 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j - 1, k);
+                }avg4 = avg4 / 3;
+
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127 || fabs(avg - avg2) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (j == 0) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg2 += image(i, j + 1, k);
+                }
+                avg2 = avg2 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i - 1, j, k);
+                }avg4 = avg4 / 3;
+
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127 || fabs(avg - avg2) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else if (j == image.height - 1) {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg2 += image(i, j - 1, k);
+                }
+                avg2 = avg2 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i - 1, j, k);
+                }avg4 = avg4 / 3;
+
+                if (fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127 || fabs(avg - avg2) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+
+            }
+            else {
+                for (int k = 0; k < 3; k++)
+                {
+                    avg += image(i, j, k);
+                }
+                avg = avg / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg2 += image(i - 1, j, k);
+                }avg2 = avg2 / 3;
+                for (int k = 0; k < 3; k++)
+                {
+                    avg3 += image(i + 1, j, k);
+                }avg3 = avg3 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg4 += image(i, j + 1, k);
+                }avg4 = avg4 / 3;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    avg5 += image(i, j - 1, k);
+                }avg5 = avg5 / 3;
+                if (fabs(avg - avg2) >= 127 || fabs(avg - avg3) >= 127 || fabs(avg - avg3) >= 127 || fabs(avg - avg4) >= 127 || fabs(avg - avg5) >= 127) {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 0;
+                    }
+                }
+                else {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        image2(i, j, k) = 255;
+                    }
+                }
+            }
+        }
+    }
+    string saved = savingWay(photo);
+    image.saveImage(saved);
+    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
+
 }
 
 // ========================================>> Filter 13: Wano doesn’t have good natural sunlight. Can you fix that? <<======================================== //
