@@ -126,7 +126,6 @@ ll get_num(ll condition, ll x = 0){
     }
 }
 
-
 // ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
 
 void grayscale_conversion(string nameimage) {
@@ -146,9 +145,11 @@ void grayscale_conversion(string nameimage) {
                 image(i, j, k) = avg;
         }
     }
+
+    // To save and open image.
     string saved = savingWay(nameimage);
     image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
+    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
 // ========================================================>> Filter 2: Black and White <<============================================================ //
@@ -175,10 +176,11 @@ void black_and_white(string image_address) {
             }
         }
     }
+
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
-
-    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
+    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
@@ -195,6 +197,8 @@ void invert_image(string image_address) {
             }
         }
     }
+
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
     system(saved.c_str());
@@ -276,15 +280,15 @@ void Flip_image(string image_address) {
             }
         }
 
+        // To save and open image.
         string saved = savingWay(image_address);
         image.saveImage(saved);
-
-        cout << endl << "Image saved in " << saved << " successfully" << endl << endl;
+        cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 
         // To check if user wants to make another flip or not...
         cin.ignore(0, '\n');
         while (true) {
-            cout << "Do you want to make another flip?\n [1] Yes\n [2] No\nYour choice :";
+            cout << "Do you want to make another flip?\n [1] Yes.\n [2] No.\nEnter Your Choice :";
             string choice;
             getline(cin, choice);
             if (choice == "1")              // if yes
@@ -370,6 +374,8 @@ void rotate_image(string image_address) {
             }
         }
     }
+
+    // To save and open image.
     string saved = savingWay(image_address);
     if(valid)
         image.saveImage(saved);
@@ -378,15 +384,16 @@ void rotate_image(string image_address) {
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-//=========================================================>>Filter 6:Crop image filter<<===============================================================//
+//=========================================================>> Filter 6: Crop image filter <<===============================================================//
+
 void crop_image(string image_address){
     Image img(image_address);
-    // To show the user image data
+    // To show the user image data.
     cout << endl << "# ===== Welcome to Crop Image Filter ===== #" << endl;
     cout << "Image Height is : " << img.height << endl;
     cout << "Image Width is : " << img.width << endl;
     
-    // to take the crop image data from user
+    // To take the crop image data from user.
     ll x, y, new_height, new_width;
     cout << "Please, Enter the X that you want to crop from : ";
     x = get_num(img.width);
@@ -397,7 +404,7 @@ void crop_image(string image_address){
     cout << "Please, Enter the height of photo : ";
     new_height = get_num(img.height, y);
 
-    // Crop functionality
+    // Crop functionality.
     Image image(new_width, new_height);
     ll image_width = 0;
     for(ll n = x; n < x + new_height; n++){
@@ -410,24 +417,25 @@ void crop_image(string image_address){
         image_width++;
     }
 
-    // To save image
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-//=========================================================>>Filter 7:Lighten And Darken <<===============================================================//
+//=========================================================>> Filter 7: Lighten And Darken <<===============================================================//
+
 void Lighten_Darken(string nameimage) {
-    //vaildation for files and the saved name is missed
-    cout << "===========\"Welcome to lighten and darken filter\"=============\n";
-    cout << "pls enter the image name\n";
+    // Vaildation for files and the saved name is missed.
+    cout << "\n# ===== Welcome to lighten and darken filter ===== #\n";
+    cout << "Please enter the image name:\n";
     Image image(nameimage);
-    cout << "[1]Darken filter\n[2]Lighten filter\nEnter your choice\n";
+    cout << "[1] Darken filter.\n[2] Lighten filter.\nEnter Your Choice:\n";
     string choice11;
     getline(cin, choice11);
-    //////validation
+    ////// Validation
     while (choice11 != "1" && choice11 != "2") {
-        cout << "Enter a valid choice\n";
+        cout << "Enter a valid choice.\n";
         getline(cin, choice11);
     }
     if (choice11 == "1")
@@ -458,11 +466,13 @@ void Lighten_Darken(string nameimage) {
         }
 
     }
+
+    // To save and open image.
     string saved = savingWay(nameimage);
     image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
-
+    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
+
 // ========================================================>> Filter 9: Adding a Frame to the Picture <<======================================================== //
 
 void adding_a_frame(string image_address){
@@ -515,8 +525,8 @@ void adding_a_frame(string image_address){
     }
 
     cout << endl;
-    for (int i = 0; i < image1.width; i++) {
-        for (int j = 0; j < image1.height; j++) {
+    for (int i = 0; i < image1.width; ++i) {
+        for (int j = 0; j < image1.height; ++j) {
             for (int k = 0; k < 3; ++k) {
                 if ((i <= (Min*0.02) || j <= (Min*0.02) || i >= image1.width-(Min*0.02) || j >= image1.height-(Min*0.02)) && (frame == "1" || frame == "2")){         // Simple Frame.
                     if (ch_colour == "1"){
@@ -574,21 +584,23 @@ void adding_a_frame(string image_address){
         }
     }
 
+    // To save and open image.
     string saved = savingWay(image_address);
     image1.saveImage(saved);
     system(saved.c_str());
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 //==============================================>> Filter 10 : Detect edges 'there is a question if the line is thick or thin ??'<<==============================//
+
 void detect_edges(string photo)
 {
-    cout << "==========\"Welcome to detect edges filter\"=============\n";
-    cout << "Please enter the photo\n";
-    //string photo;
-    //getline(cin, photo);
+    cout << "\n# ===== Welcome to detect edges filter ===== #\n";
+    cout << "Please enter the photo:\n";
+    // String photo;
+    // getline(cin, photo);
     Image image(photo);
     Image image2(image.width, image.height);
-    // the idea of  black and white filter
+    // The idea of  black and white filter.
     for (int i = 0; i < image.width; i++) {
         for (int j = 0; j < image.height; j++) {
             int average = 0;
@@ -606,7 +618,7 @@ void detect_edges(string photo)
             }
         }
     }
-    // the idea of the detect
+    // The idea of the detect
     float avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5 = 0;
     for (int i = 0; i < image.width; i++)
     {
@@ -918,13 +930,15 @@ void detect_edges(string photo)
             avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5=0;
         }
     }
+
+    // To save and open image.
     string saved = savingWay(photo);
     image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully!" << endl << endl;
-
+    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
-//=========================================================>>Filter 11: Resize Image filter<<===============================================================//
+// =========================================================>> Filter 11: Resize Image filter <<=============================================================== //
+
 void resize_filter(string image_address){
     Image img(image_address);
     // To show the user image data
@@ -932,7 +946,7 @@ void resize_filter(string image_address){
     cout << "Image Height is : " << img.height << endl;
     cout << "Image Width is : " << img.width << endl;
     
-    // to see how would user enter the resize dimention of image
+    // To see how would user enter the resize dimention of image
     string choice;
     while (true){
         cout << "What do you want new image to be? \n [1] With a new dimintion for the image \n [2] its size increase by a certain percentage\nYour choice :";
@@ -943,7 +957,7 @@ void resize_filter(string image_address){
     }
 
     double image_width, image_height, change_width, change_height, percentage_change_w, percentage_change_h;
-    // if he want to enter new dimintion 
+    // If he want to enter new dimintion 
     if(choice == "1"){
         cout << "Please, Enter the new width of the image : ";
         image_width = get_num(LONG_LONG_MAX);
@@ -951,7 +965,7 @@ void resize_filter(string image_address){
         image_height = get_num(LONG_LONG_MAX);
     }
 
-    // if he want to increase the size of image by a certain percentage
+    // If he want to increase the size of image by a certain percentage
     else{
         cout << "Please, Enter the percentage change of the image width (from 100%) : ";
         percentage_change_w = get_num(LONG_LONG_MAX);
@@ -961,7 +975,7 @@ void resize_filter(string image_address){
         image_height = img.height * percentage_change_h / 100;
     }
 
-    // percentage of change
+    // Percentage of change
     change_width = img.width/image_width;
     change_height = img.height/image_height;
 
@@ -974,12 +988,70 @@ void resize_filter(string image_address){
         }
     }
     
-    // To save image
+    // To save and open image.
     string saved;//savingWay(image_address);
     cin >> saved ;
     image.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 } 
+
+// ========================================================>> Filter 12: Blur Images <<======================================================== //
+
+void blur_images(string image_address){
+    cout << "\n# ===== Welcome to the Blur Images Filter ===== #\n";
+    Image image(image_address);
+    ll r = 30, area = ((2*r) +1) * ((2*r) +1);
+
+    // To build 3D prefix sum vector.
+    vector<vector<vector<ll>>> pref(image.width, vector<vector<ll>>(image.height, vector<ll>(3)));
+    for (int i = 0; i < image.width; ++i) {
+        pref[i][0][0] = image(i, 0, 0);
+        pref[i][0][1] = image(i, 0, 1);
+        pref[i][0][2] = image(i, 0, 2);
+    }
+    for (int j = 0; j < image.height; ++j) {
+        pref[0][j][0] = image(0, j, 0);
+        pref[0][j][1] = image(0, j, 1);
+        pref[0][j][2] = image(0, j, 2);
+    }
+    for (int i = 1; i < image.width; ++i) {
+        for (int j = 1; j < image.height; ++j) {
+            pref[i][j][0] = image(i, j, 0) + pref[i-1][j][0] + pref[i][j-1][0] - pref[i-1][j-1][0];
+            pref[i][j][1] = image(i, j, 1) + pref[i-1][j][1] + pref[i][j-1][1] - pref[i-1][j-1][1];
+            pref[i][j][2] = image(i, j, 2) + pref[i-1][j][2] + pref[i][j-1][2] - pref[i-1][j-1][2];
+        }
+    }
+
+    // To blur image's pixels.
+    ll sum = 0;
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            for (int k = 0; k < 3; ++k) {
+                ll i1 = i+r, i2 = i-r-1, j1 = j+r, j2 = j-r-1;
+                if (i1 >= image.width-1){
+                    i1 = image.width-1;
+                }
+                if (i2 <= 0) {
+                    i2 = 0;
+                }
+                if (j1 >= image.height-1){
+                    j1 = image.height-1;
+                }
+                if (j2 <= 0){
+                    j2 = 0;
+                }
+                sum = pref[i1][j1][k] - pref[i2][j1][k] - pref[i1][j2][k] + pref[i2][j2][k];
+                image(i,j,k) = sum / area;
+            }
+        }
+    }
+
+    // To save and open image.
+    string saved = savingWay(image_address);
+    image.saveImage(saved);
+    system(saved.c_str());
+    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
+}
 
 // ========================================>> Filter 13: Wano doesn’t have good natural sunlight. Can you fix that? <<======================================== //
 
@@ -987,13 +1059,15 @@ void natural_sunlight(string image_address){
     cout << "\n# ===== Welcome to the Natural Sunlight Filter ===== #\n";
     Image image(image_address);
 
-    for (int i = 0; i < image.width; i++){
-        for (int j = 0; j < image.height; j++){
-            for (int k = 0; k < 3; k++){
+    for (int i = 0; i < image.width; ++i){
+        for (int j = 0; j < image.height; ++j){
+            for (int k = 0; k < 3; ++k){
                 image (i,j,2) *= 0.888;
             }
         }
     }
+
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
     system(saved.c_str());
@@ -1005,11 +1079,14 @@ void natural_sunlight(string image_address){
 void look_puple(string image_address){
     cout << "\n# ===== Welcome to the Look Purple Filter ===== #\n";
     Image image(image_address);
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
+  
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
             image(i,j,1) *= 0.7;
         }
     }
+
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
     system(saved.c_str());
@@ -1022,9 +1099,9 @@ void infrared(string image_address){
     cout << "\n# ===== Welcome to the Infrared Photography Filter ===== #\n";
     Image image(image_address);
     
-    for (int i = 0; i < image.width; i++){
-        for (int j = 0; j < image.height; j++){
-            for (int k = 0; k < 3; k++){
+    for (int i = 0; i < image.width; ++i){
+        for (int j = 0; j < image.height; ++j){
+            for (int k = 0; k < 3; ++k){
                 image(i, j, 0) = 252;
                 image (i,j,1) = 255 - image (i,j,1);
                 image (i,j,2) = 255 - image (i,j,2);
@@ -1032,6 +1109,7 @@ void infrared(string image_address){
         }
     }
 
+    // To save and open image.
     string saved = savingWay(image_address);
     image.saveImage(saved);
     system(saved.c_str());
@@ -1129,7 +1207,7 @@ int main() {
 
             if (choice1 == "1") {              // If he wants to
                 cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
-                cout << "Please, Enter the photo\n";
+                cout << "Please, Enter the photo :\n";
                 getline(cin, nameimage);
                 nameimage = validationpart1(nameimage);
                 break;
@@ -1141,7 +1219,6 @@ int main() {
             // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
         }
-
     }
     return 0;
 }
