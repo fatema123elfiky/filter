@@ -1,6 +1,6 @@
-# Pics Filters.. 💫
+# Pics Filters ... 💫
 - A small project for editing the photos with 12 different filters.
-## partners. 👨‍💻👩‍💻
+## Partners. 👨‍💻👩‍💻
 --> Aly El-Deen Yasser Ali (Aly El-Badry).
 
 --> Mohammed Atef Abd El-Kader (Toffi).
@@ -16,5 +16,6 @@
 -  Look Purple filter.
 -  Infrared filter.
 -  Natural Sunlight filter.
--  Lighten and Darken filter
--  Detect Edeges filter
+-  Lighten and Darken filter.
+-  Detect Edeges filter.
+-  Blur Images filter.
