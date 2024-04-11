@@ -18,6 +18,3 @@
 -  Natural Sunlight filter.
 -  Lighten and Darken filter
 -  Detect Edeges filter
--  ممسؤىه
--  م
--  م
