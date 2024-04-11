@@ -1,12 +1,12 @@
 # Pics Filters ... 💫
-- A small project for editing the photos with 12 different filters.
+- A small project for editing the photos with 20 different filters and is made by GUI.
 ## Partners. 👨‍💻👩‍💻
 --> Aly El-Deen Yasser Ali (Aly El-Badry).
 
 --> Mohammed Atef Abd El-Kader (Toffi).
 
 --> Fatema El-Zahra (El-Fiky).
-## Filters Type 🫧
+## Filters Type ✨
 -  Grayscale Filter.
 -  Black and white filter.
 -  Invert filter.
