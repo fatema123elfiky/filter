@@ -1052,8 +1052,31 @@ void natural_sunlight(string image_address) {
 
 
 // =================================================>> Filter 15: Den Den Mochi Filter <<=================================================================== //
+void old_tv(Image& image)
+{
+    cout << "Welcome to the tv filter\n";
+    srand(unsigned int(time(0)));
+    int intens = 25;
 
-
+    for (int i = 0; i < image.width; i++)
+    {
+        for (int j = 0; j < image.height; j++)
+        {
+            
+            int random = rand() % (2 * intens + 1) - intens;
+            image(i, j, 0) = (random + image(i, j, 0)) / 2;
+            image(i, j, 1) = (random + image(i, j, 1)) / 2;
+            image(i, j, 2) = (random + image(i, j, 2)) / 2;
+            
+            if (j % 2 == 0)
+            {
+                image(i, j, 0) /= 2;
+                image(i, j, 1) /= 2;
+                image(i, j, 2) /= 2;
+            }
+        }
+    }
+}
 
 // =================================================>> Filter 16: Make photo more purple <<================================================================ //
 
@@ -1210,8 +1233,8 @@ int main() {
     //     oil_painting(nameimage);
 
         // Den Den Mochi filter
-    // else if(choice_menu == "15")
-        // Den_Den_mochi(nameimage);
+     else if(choice_menu == "15")
+            old_tv(image);
 
         // Make image purple filter
         else if (choice_menu == "16")
@@ -1264,7 +1287,7 @@ int main() {
         // To exit program
         else if (choice_menu == "22") {
             while (true) {
-                cout << "Did you saved your work?\nNote : If you don't save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your Choice :";
+                cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
                 string end;
                 getline(cin, end);
                 if (end == "2") {
@@ -1295,7 +1318,7 @@ int main() {
 
             else if (choice == "2") {        // If he doesn't
                 while (true) {
-                    cout << "Did you saved your work?\nNote : If you don't save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your Choice :";
+                    cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
                     string end;
                     getline(cin, end);
                     if (end == "2") {
