@@ -2,7 +2,11 @@
 --> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
              in this once there is 5 different filters that are : Gray Scale filter, Black and White filter,
-             invert image filter, Flip image filter, Rotation image filter, and we will soon make a new filters.
+             invert image filter, merage two images, Flip image filter, Rotation image filter, Darken and 
+             lighen image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
+             Blur filter, natural sunlight filter, oil painting filter, Den Den mushi filter, make image purple,
+             infared image filter, image skewing, , , and we will try to not stop at this point and continue for 
+             a bigger program. 
 
 --> Author of (1, 4, 7, 10) filters: Fatema El-Zhraa Ahmed Mohamed El-Fiky.             (ID:20230280)         (Section : S22)
 --> Email : fatmaelfeky922@gmail.com
@@ -86,7 +90,7 @@ string validationpart2(string nameOfSavedImage) {
     return nameOfSavedImage;
 }
 
-
+// To get from user the way he wants to save the image by
 string savingWay(string originname){
     cout << "Do you like to save in new image or the same one?\n [1] Save in new image.\n [2] Save in the same picture.\nEnter Your Choice: ";
     string choice;
@@ -205,11 +209,16 @@ void invert_image(string image_address) {
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-// ========================================================>> Filter 4: Flip image <<================================================================ //
+// ========================================================>> Filter 4: Merge two Images <<=============================================================== //
+
+
+
+// ========================================================>> Filter 5: Flip image <<================================================================ //
 
 void Flip_image(string image_address) {
     string choice;
 
+    Image image(image_address);
     while (true) {
 
         // To Check the menu choices.
@@ -230,7 +239,6 @@ void Flip_image(string image_address) {
                 break;
             cout << "Invalid Choice. Try Again." << endl << endl;
         }
-        Image image(image_address);
 
         // Vertical Flip.
         if (choice == "2") {
@@ -245,7 +253,7 @@ void Flip_image(string image_address) {
             }
         }
 
-            // Horizontal Flip.
+        // Horizontal Flip.
         else if (choice == "1") {
             for (int i = 0; i < image.width / 2; i++) {
                 for (int j = 0; j < image.height; j++) {
@@ -258,7 +266,7 @@ void Flip_image(string image_address) {
             }
         }
 
-            // Both Flip.
+        // Both Flip.
         else {
             for (int i = 0; i < image.width; i++) {
                 for (int j = 0; j < image.height / 2; j++) {
@@ -280,10 +288,6 @@ void Flip_image(string image_address) {
             }
         }
 
-        // To save and open image.
-        string saved = savingWay(image_address);
-        image.saveImage(saved);
-        cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 
         // To check if user wants to make another flip or not...
         cin.ignore(0, '\n');
@@ -293,8 +297,14 @@ void Flip_image(string image_address) {
             getline(cin, choice);
             if (choice == "1")              // if yes
                 break;
-            else if (choice == "2")         // if no
+
+            else if (choice == "2"){         // if no
+                // To save and open image.
+                string saved = savingWay(image_address);
+                image.saveImage(saved);
+                cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
                 return;
+            }
 
             // If he enter an invalid choice
             cout << "Please choose a valid option " << endl;
@@ -302,7 +312,7 @@ void Flip_image(string image_address) {
     }
 }
 
-// ========================================================>> Filter 5: Rotate Image <<======================================================== //
+// ========================================================>> Filter 6: Rotate Image <<======================================================== //
 
 void rotate_image(string image_address) {
 
@@ -384,7 +394,50 @@ void rotate_image(string image_address) {
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-//=========================================================>> Filter 6: Crop image filter <<===============================================================//
+//=========================================================>> Filter 7: Lighten And Darken <<===============================================================//
+
+void Lighten_Darken(string nameimage) {
+    // Vaildation for files and the saved name is missed.
+    cout << "\n# ===== Welcome to lighten and darken filter ===== #\n";
+    cout << "Please enter the image name:\n";
+    cout << " [1] Darken filter.\n [2] Lighten filter.\nEnter Your Choice:\n";
+    Image image(nameimage);
+    string choice11;
+    getline(cin, choice11);
+    
+    // Validation
+    while (choice11 != "1" && choice11 != "2") {
+        cout << "Enter a valid choice.\n";
+        getline(cin, choice11);
+    }
+
+    // Darken filter.
+    if (choice11 == "1"){
+        for (int i = 0; i < image.width; i++){
+            for (int j = 0; j < image.height; j++){
+                for (int k = 0; k < 3; k++)
+                    image(i, j, k) = image(i, j, k) / 2;
+            }
+        }
+    }
+
+    // Lighten image
+    else {
+        for (int i = 0; i < image.width; i++){
+            for (int j = 0; j < image.height; j++){
+                for (int k = 0; k < 3; k++)
+                    image(i, j, k) = min(image(i, j, k) * 2, 255);
+            }
+        }
+    }
+
+    // To save and open image.
+    string saved = savingWay(nameimage);
+    image.saveImage(saved);
+    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
+}
+
+//=========================================================>> Filter 8: Crop image filter <<===============================================================//
 
 void crop_image(string image_address){
     Image img(image_address);
@@ -423,57 +476,7 @@ void crop_image(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-//=========================================================>> Filter 7: Lighten And Darken <<===============================================================//
-
-void Lighten_Darken(string nameimage) {
-    // Vaildation for files and the saved name is missed.
-    cout << "\n# ===== Welcome to lighten and darken filter ===== #\n";
-    cout << "Please enter the image name:\n";
-    Image image(nameimage);
-    cout << "[1] Darken filter.\n[2] Lighten filter.\nEnter Your Choice:\n";
-    string choice11;
-    getline(cin, choice11);
-    ////// Validation
-    while (choice11 != "1" && choice11 != "2") {
-        cout << "Enter a valid choice.\n";
-        getline(cin, choice11);
-    }
-    if (choice11 == "1")
-    {
-        for (int i = 0; i < image.width; i++)
-        {
-            for (int j = 0; j < image.height; j++)
-            {
-                for (int k = 0; k < 3; k++)
-                {
-                    image(i, j, k) = image(i, j, k) / 2;
-                }
-            }
-        }
-
-    }
-    else {
-        for (int i = 0; i < image.width; i++)
-        {
-            for (int j = 0; j < image.height; j++)
-            {
-                for (int k = 0; k < 3; k++)
-                {
-                    image(i, j, k) = min(image(i, j, k) * 2, 255);
-
-                }
-            }
-        }
-
-    }
-
-    // To save and open image.
-    string saved = savingWay(nameimage);
-    image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
-}
-
-// ========================================================>> Filter 9: Adding a Frame to the Picture <<======================================================== //
+// ========================================================>> Filter 9: Adding a Frame to the Picture <<================================================= //
 
 void adding_a_frame(string image_address){
     cout << "\n# ===== Welcome to the Adding a Frame to the Picture Filter ===== #\n";
@@ -481,6 +484,8 @@ void adding_a_frame(string image_address){
     ll Min = min(image.height, image.width);
     Image image1(image.width+(Min*0.02), image.height+(Min*0.02));
     string ch_colour, frame;
+    
+    // Validate the colour menu
     while (true){
         cout << "What colour do you want?\n"
                 " [1] Red.                         [2] Blue.\n"
@@ -505,6 +510,7 @@ void adding_a_frame(string image_address){
 
     cout << endl;
 
+    // Validate the frame menu
     while (true){
         cout << "What frame do you want?\n"
                 " [1] Simple frame.\n [2] Fancy frame.\n"
@@ -524,6 +530,7 @@ void adding_a_frame(string image_address){
         cout << "Invalid Choice. Try Again." << endl << endl;
     }
 
+    // Frame function
     cout << endl;
     for (int i = 0; i < image1.width; ++i) {
         for (int j = 0; j < image1.height; ++j) {
@@ -570,7 +577,7 @@ void adding_a_frame(string image_address){
                         image1(i,j, 2) = 0;
                     }
                 }
-                  // Fancy Frame.
+                // Fancy Frame.
                 else if (((i >= (Min*0.02) && i <= (Min*0.02)*1.45) || (j >= (Min*0.02) && j <= (Min*0.02)*1.45) || (i <= image1.width-(Min*0.02) && i >= (image1.width-(Min*0.02)*1.45)) || (j <= image1.height-(Min*0.02) && j >= (image1.height-(Min*0.02)*1.45))) && frame == "2"){
                     image1(i,j,k) = 235;
                 }
@@ -590,17 +597,15 @@ void adding_a_frame(string image_address){
     system(saved.c_str());
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
-//==============================================>> Filter 10 : Detect edges 'there is a question if the line is thick or thin ??'<<==============================//
 
-void detect_edges(string photo)
-{
+//=========================================================>> Filter 10 : Detect edges <<=================================================================//
+
+void detect_edges(string photo){
     cout << "\n# ===== Welcome to detect edges filter ===== #\n";
-    cout << "Please enter the photo:\n";
-    // String photo;
-    // getline(cin, photo);
     Image image(photo);
     Image image2(image.width, image.height);
-    // The idea of  black and white filter.
+    
+    // The idea of black and white filter.
     for (int i = 0; i < image.width; i++) {
         for (int j = 0; j < image.height; j++) {
             int average = 0;
@@ -618,12 +623,11 @@ void detect_edges(string photo)
             }
         }
     }
+
     // The idea of the detect
     float avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5 = 0;
-    for (int i = 0; i < image.width; i++)
-    {
-        for (int j = 0; j < image.height; j++)
-        {
+    for (int i = 0; i < image.width; i++){
+        for (int j = 0; j < image.height; j++){
             if (i == 0 && j == 0) {
                 for (int k = 0; k < 3; k++)
                 {
@@ -651,7 +655,6 @@ void detect_edges(string photo)
                         image2(i, j, k) = 255;
                     }
                 }
-
 
             }
             else if (i == 0 && j == image.height - 1) {
@@ -937,7 +940,7 @@ void detect_edges(string photo)
     cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
-// =========================================================>> Filter 11: Resize Image filter <<=============================================================== //
+// =========================================================>> Filter 11: Resize Image filter <<===========================================================//
 
 void resize_filter(string image_address){
     Image img(image_address);
@@ -989,13 +992,12 @@ void resize_filter(string image_address){
     }
     
     // To save and open image.
-    string saved;//savingWay(image_address);
-    cin >> saved ;
+    string saved = savingWay(image_address);
     image.saveImage(saved);
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 } 
 
-// ========================================================>> Filter 12: Blur Images <<======================================================== //
+// ========================================================>> Filter 12: Blur Images <<===================================================================//
 
 void blur_images(string image_address){
     cout << "\n# ===== Welcome to the Blur Images Filter ===== #\n";
@@ -1053,7 +1055,7 @@ void blur_images(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-// ========================================>> Filter 13: Wano doesn’t have good natural sunlight. Can you fix that? <<======================================== //
+// ========================================================>> Filter 13: natural sunlight filter <<========================================================//
 
 void natural_sunlight(string image_address){
     cout << "\n# ===== Welcome to the Natural Sunlight Filter ===== #\n";
@@ -1073,8 +1075,15 @@ void natural_sunlight(string image_address){
     system(saved.c_str());
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
+// =================================================>> Filter 14: Oil Painting filter<<===================================================================== //
 
-// ==============================================>> Filter 16: Wano looks so purple at night can you make Luffy look purple? <<================================================== //
+
+
+// =================================================>> Filter 15: Den Den Mochi Filter <<=================================================================== //
+
+
+
+// =================================================>> Filter 16: Make photo more purpule <<================================================================ //
 
 void look_puple(string image_address){
     cout << "\n# ===== Welcome to the Look Purple Filter ===== #\n";
@@ -1093,7 +1102,7 @@ void look_puple(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
-// ==================================>> Filter 17: Samurais are passionate about capturing the world in infrared photography <<================================== //
+// =================================================>> Filter 17: infrared pics Filter <<=================================================================== //
 
 void infrared(string image_address){
     cout << "\n# ===== Welcome to the Infrared Photography Filter ===== #\n";
@@ -1116,16 +1125,30 @@ void infrared(string image_address){
     cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
+// =================================================>>Filter 18 : Skewing image Filter <<================================================================== //
+
+
+
+// =================================================>>Filter 19 : Filter <<================================================================== //
+
+
+
+// =================================================>>Filter 20 : Filter <<================================================================== //
+
+
 
 // ===============================================================>> Main Application <<=============================================================== //
-
 
 int main() {
     // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
     cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
-    cout << "    invert image filter, Flipping image filter and Rotating image filter and we will add another filters soon." << endl;
+    cout << "    invert image filter, Merge two image filter, Flipping image filter, Rotating image filter, Darken" << endl;
+    cout << "    and lighting image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing" << endl;
+    cout << "    image, Blur filter, natural sunlight filter, oil painting filter, Den Den mushi filter, make image" << endl;
+    cout << "    purple,infared image filter, image skewing, , , and we will try to not stop at this point and " << endl; 
+    cout << "    continue for a bigger program." << endl;
     cout << "===================================================================================================" << endl;
     string nameimage;
     cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
@@ -1139,11 +1162,14 @@ int main() {
         string choice_menu;
         while (true) {
             cout << "\nChoose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Flip Image.\n [5] Rotate Image.\n [6] Exit Application.\nEnter Your Choice:";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
+            cout << " [7] Daeken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filters.\n [11] Resizing Image Filter.\n";
+            cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Oil Painting Filter.\n [15] Den Den Mochi Filter.\n [16] Look Purple Filter.\n";
+            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n[21] Saving Image \n[22] Exit Program .\nYour Choice is : ";
             getline(cin, choice_menu);
 
             bool check = false;
-            for (int i = 1; i <= 6; i++) {         // Checking of answer.
+            for (int i = 1; i <= 21; i++) {         // Checking of answer.
                 if (choice_menu == to_string(i)) {
                     check = true;
                     break;
@@ -1155,7 +1181,7 @@ int main() {
             cout << "Invalid Choice. Try Again." << endl << endl;
         }
 
-        // Gray scale filter
+            // Gray scale filter
         if (choice_menu == "1")
             grayscale_conversion(nameimage);
 
@@ -1167,16 +1193,76 @@ int main() {
         else if (choice_menu == "3")
             invert_image(nameimage);
 
+            // Merge Two Image Filters
+        // else if (choice_menu == "4")
+            // merge_two_image(nameimage);
+
             // Flip filter
-        else if (choice_menu == "4")
+        else if (choice_menu == "5")
             Flip_image(nameimage);
 
             // Rotate filter
-        else if (choice_menu == "5")
+        else if (choice_menu == "6")
             rotate_image(nameimage);
 
+            // Darken and lighten Image filter
+        else if (choice_menu == "7")
+            Lighten_Darken(nameimage);
+
+             // Crop filter
+        else if (choice_menu == "8")
+            crop_image(nameimage);
+
+            // Adding frame to image filter
+        else if (choice_menu == "9")
+            adding_a_frame(nameimage);
+        
+            // Detect edges in image
+        else if (choice_menu == "10")
+            detect_edges(nameimage);
+        
+            // Resize image filter
+        else if (choice_menu == "11")
+            resize_filter(nameimage);
+        
+            // Blur filter
+        else if(choice_menu == "12")
+            blur_images(nameimage);
+        
+            // Natural sunlight filter
+        else if(choice_menu == "13")
+            natural_sunlight(nameimage);
+        
+            // Oil painting filter
+        // else if(choice_menu == "14")
+        //     oil_painting(nameimage);
+        
+            // Den Den Mochi filter
+        // else if(choice_menu == "15")
+            // Den_Den_mochi(nameimage);
+        
+            // Make image purple filter
+        else if(choice_menu == "16")
+            look_puple(nameimage);
+        
+            // Infrared image filter
+        else if(choice_menu == "17")
+            infrared(nameimage);
+        
+            // Skewing image Filter
+        // else if(choice_menu == "18")
+        //     skewing_image(nameimage);
+        
+            // Filter
+        // else if(choice_menu == "19")
+        //     filter(nameimage);
+        
+            // Filter
+        // else if(choice_menu == "20")
+        //     filter(nameimage);
+        
             // To exit program
-        else if (choice_menu == "6") {
+        else if (choice_menu == "22") {
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
             break;
         }
@@ -1190,7 +1276,7 @@ int main() {
             if (choice == "1")              // If he wants to continue
                 break;
 
-            else if (choice == "2") {        // If he doesn't
+            else if (choice == "2") {        // If he doesn't// DONT Forget to add saving here when you change the programe saving way
                 cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
                 return 0;
             }
