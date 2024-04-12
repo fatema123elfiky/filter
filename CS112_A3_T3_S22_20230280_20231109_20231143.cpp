@@ -1227,7 +1227,7 @@ int main() {
         // else if(choice_menu == "20")
         //     filter(nameimage);
         
-            // To save the photo.
+            // To save photo
         else if (choice_menu == "21"){
             string saved = savingWay(nameimage);
             image.saveImage(saved);
@@ -1257,8 +1257,25 @@ int main() {
 
             // To exit program
         else if (choice_menu == "22") {
-            cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
-            break;
+            while(true){
+                cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                string end;
+                getline(cin, end);
+                if (end == "2"){
+                    string saved = savingWay(nameimage);
+                    image.saveImage(saved);
+                    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
+                    cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
+                    return 0;
+                }
+
+                else if (end == "1"){
+                    cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
+                    return 0;
+                }
+
+                cout << "Please, Enter a valid option" <<endl;
+            }
         }
 
         // Continue a menu to see if user wants to continue or exit the program.
@@ -1271,13 +1288,26 @@ int main() {
                 break;
 
             else if (choice == "2") {        // If he doesn't
-                string saved = savingWay(nameimage);
-                image.saveImage(saved);
-                cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
-                cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
-                return 0;
-            }
+                while(true){
+                    cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                    string end;
+                    getline(cin, end);
+                    if (end == "2"){
+                        string saved = savingWay(nameimage);
+                        image.saveImage(saved);
+                        cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
+                        cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
+                        return 0;
+                    }
 
+                    else if (end == "1"){
+                        cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
+                        return 0;
+                    }
+
+                    cout << "Please, Enter a valid option" <<endl;
+                }
+            }
             // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
         }
