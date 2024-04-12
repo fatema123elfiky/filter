@@ -132,9 +132,8 @@ ll get_num(ll condition, ll x = 0){
 
 // ========================================================>> Filter 1: Grayscale Conversion <<======================================================== //
 
-void grayscale_conversion(string nameimage) {
+void grayscale_conversion(Image &image) {
     cout << "\n# ===== Welcome to the Grayscale Filter ===== #\n";
-    Image image(nameimage);
 
     // To get the degree of the gray colour
     for (int i = 0; i < image.width; i++){
@@ -150,17 +149,12 @@ void grayscale_conversion(string nameimage) {
         }
     }
 
-    // To save and open image.
-    string saved = savingWay(nameimage);
-    image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
 // ========================================================>> Filter 2: Black and White <<============================================================ //
 
-void black_and_white(string image_address) {
+void black_and_white(Image &image) {
     cout << endl << "\n# ===== Welcome to Black and White Filter ===== #" << endl;
-    Image image(image_address);
 
     // To make the dark point black and the light point white
     for (int i = 0; i < image.width; i++) {
@@ -180,18 +174,12 @@ void black_and_white(string image_address) {
             }
         }
     }
-
-    // To save and open image.
-    string saved = savingWay(image_address);
-    image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
 // ========================================================>> Filter 3: Invert Image <<=============================================================== //
 
-void invert_image(string image_address) {
+void invert_image(Image & image) {
     cout << endl << "\n# ===== Welcome to Invert Image Filter ===== #" << endl;
-    Image image(image_address);
 
     // For inverting the image
     for (int i = 0; i < image.width; ++i) {
@@ -201,12 +189,6 @@ void invert_image(string image_address) {
             }
         }
     }
-
-    // To save and open image.
-    string saved = savingWay(image_address);
-    image.saveImage(saved);
-    system(saved.c_str());
-    cout << "\nImage saved in " << saved << " successfully.\n" << endl;
 }
 
 // ========================================================>> Filter 4: Merge two Images <<=============================================================== //
@@ -215,10 +197,8 @@ void invert_image(string image_address) {
 
 // ========================================================>> Filter 5: Flip image <<================================================================ //
 
-void Flip_image(string image_address) {
+void Flip_image(Image &image) {
     string choice;
-
-    Image image(image_address);
     while (true) {
 
         // To Check the menu choices.
@@ -288,7 +268,6 @@ void Flip_image(string image_address) {
             }
         }
 
-
         // To check if user wants to make another flip or not...
         cin.ignore(0, '\n');
         while (true) {
@@ -298,13 +277,8 @@ void Flip_image(string image_address) {
             if (choice == "1")              // if yes
                 break;
 
-            else if (choice == "2"){         // if no
-                // To save and open image.
-                string saved = savingWay(image_address);
-                image.saveImage(saved);
-                cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
+            else if (choice == "2")         // if no
                 return;
-            }
 
             // If he enter an invalid choice
             cout << "Please choose a valid option " << endl;
@@ -396,12 +370,11 @@ void rotate_image(string image_address) {
 
 //=========================================================>> Filter 7: Lighten And Darken <<===============================================================//
 
-void Lighten_Darken(string nameimage) {
+void Lighten_Darken(Image& image) {
     // Vaildation for files and the saved name is missed.
     cout << "\n# ===== Welcome to lighten and darken filter ===== #\n";
     cout << "Please enter the image name:\n";
     cout << " [1] Darken filter.\n [2] Lighten filter.\nEnter Your Choice:\n";
-    Image image(nameimage);
     string choice11;
     getline(cin, choice11);
     
@@ -430,11 +403,6 @@ void Lighten_Darken(string nameimage) {
             }
         }
     }
-
-    // To save and open image.
-    string saved = savingWay(nameimage);
-    image.saveImage(saved);
-    cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
 }
 
 //=========================================================>> Filter 8: Crop image filter <<===============================================================//
@@ -1149,13 +1117,13 @@ int main() {
     cout << "    image, Blur filter, natural sunlight filter, oil painting filter, Den Den mushi filter, make image" << endl;
     cout << "    purple,infared image filter, image skewing, , , and we will try to not stop at this point and " << endl; 
     cout << "    continue for a bigger program." << endl;
-    cout << "===================================================================================================" << endl;
+    cout << "================================================================================================================" << endl;
     string nameimage;
     cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
     cout << "Please, Enter the photo : ";
     getline(cin, nameimage);
     nameimage = validationpart1(nameimage);
-
+    Image image(nameimage);
     // To keep the program running.
     while (true) {
         // Menu choice to check of it
@@ -1165,7 +1133,7 @@ int main() {
             cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
             cout << " [7] Daeken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filters.\n [11] Resizing Image Filter.\n";
             cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Oil Painting Filter.\n [15] Den Den Mochi Filter.\n [16] Look Purple Filter.\n";
-            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n[21] Saving Image \n[22] Exit Program .\nYour Choice is : ";
+            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n [21] Saving Image \n [22] Exit Program .\nYour Choice is : ";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -1183,15 +1151,15 @@ int main() {
 
             // Gray scale filter
         if (choice_menu == "1")
-            grayscale_conversion(nameimage);
+            grayscale_conversion(image);
 
             // Black and White filter
         else if (choice_menu == "2")
-            black_and_white(nameimage);
+            black_and_white(image);
 
             // Invert Image filter
         else if (choice_menu == "3")
-            invert_image(nameimage);
+            invert_image(image);
 
             // Merge Two Image Filters
         // else if (choice_menu == "4")
@@ -1199,7 +1167,7 @@ int main() {
 
             // Flip filter
         else if (choice_menu == "5")
-            Flip_image(nameimage);
+            Flip_image(image);
 
             // Rotate filter
         else if (choice_menu == "6")
@@ -1207,7 +1175,7 @@ int main() {
 
             // Darken and lighten Image filter
         else if (choice_menu == "7")
-            Lighten_Darken(nameimage);
+            Lighten_Darken(image);
 
              // Crop filter
         else if (choice_menu == "8")
@@ -1261,6 +1229,34 @@ int main() {
         // else if(choice_menu == "20")
         //     filter(nameimage);
         
+            // To save photo
+        else if (choice_menu == "21"){
+            string saved = savingWay(nameimage);
+            image.saveImage(saved);
+            cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
+            
+            // To see if a user wants to change a photo or not
+            while (true) {
+                cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
+                string choice1;
+                getline(cin, choice1);
+
+                if (choice1 == "1") {              // If he wants to
+                    cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
+                    cout << "Please, Enter the photo :\n";
+                    getline(cin, nameimage);
+                    nameimage = validationpart1(nameimage);
+                    break;
+                }
+
+                else if (choice1 == "2")          // If he doesn't
+                    break;
+
+                // If he entered an invalid choice
+                cout << "Invalid Choice. Try Again." << endl;
+            }
+        }
+
             // To exit program
         else if (choice_menu == "22") {
             cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
@@ -1276,7 +1272,10 @@ int main() {
             if (choice == "1")              // If he wants to continue
                 break;
 
-            else if (choice == "2") {        // If he doesn't// DONT Forget to add saving here when you change the programe saving way
+            else if (choice == "2") {        // If he doesn't
+                string saved = savingWay(nameimage);
+                image.saveImage(saved);
+                cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
                 cout << endl << "# === Thanks For Using Our Application !! === #" << endl;
                 return 0;
             }
@@ -1285,26 +1284,6 @@ int main() {
             cout << "Invalid Choice. Try Again." << endl;
         }
 
-        // To see if a user wants to change a photo or not
-        while (true) {
-            cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
-            string choice1;
-            getline(cin, choice1);
-
-            if (choice1 == "1") {              // If he wants to
-                cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
-                cout << "Please, Enter the photo :\n";
-                getline(cin, nameimage);
-                nameimage = validationpart1(nameimage);
-                break;
-            }
-
-            else if (choice1 == "2")          // If he doesn't
-                break;
-
-            // If he entered an invalid choice
-            cout << "Invalid Choice. Try Again." << endl;
-        }
     }
     return 0;
 }
