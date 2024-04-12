@@ -1232,27 +1232,7 @@ int main() {
             string saved = savingWay(nameimage);
             image.saveImage(saved);
             cout << endl << "Image saved in " << saved << " successfully." << endl << endl;
-            
-            // To see if a user wants to change a photo or not
-            while (true) {
-                cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
-                string choice1;
-                getline(cin, choice1);
-
-                if (choice1 == "1") {              // If he wants to
-                    cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
-                    cout << "Please, Enter the photo :\n";
-                    getline(cin, nameimage);
-                    nameimage = validationpart1(nameimage);
-                    break;
-                }
-
-                else if (choice1 == "2")          // If he doesn't
-                    break;
-
-                // If he entered an invalid choice
-                cout << "Invalid Choice. Try Again." << endl;
-            }
+            checkkk = true;
         }
 
             // To exit program
@@ -1310,6 +1290,30 @@ int main() {
             }
             // If he entered an invalid choice
             cout << "Invalid Choice. Try Again." << endl;
+        }
+
+
+        if(checkkk){
+            // To see if a user wants to change a photo or not
+            while (true) {
+                cout << "Do You Want To Change Photo?\n [1] Yes.\n [2] No.\nEnter Your Choice: ";
+                string choice1;
+                getline(cin, choice1);
+
+                if (choice1 == "1") {              // If he wants to
+                    cout << "The filename should end with the extension .jpg or.png or.bmp or.jpeg\n";
+                    cout << "Please, Enter the photo :\n";
+                    getline(cin, nameimage);
+                    nameimage = validationpart1(nameimage);
+                    break;
+                }
+
+                else if (choice1 == "2")          // If he doesn't
+                    break;
+
+                // If he entered an invalid choice
+                cout << "Invalid Choice. Try Again." << endl;
+            }
         }
 
     }
