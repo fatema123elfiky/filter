@@ -2,8 +2,8 @@
 --> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
              in this once there is 20 different filters that are : Gray Scale filter, Black and White filter,
-             Invert image filter, Merage two images, Flip image filter, Rotation image filter, Darken and 
-             Lighen image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
+             Invert image filter, Merge two images, Flip image filter, Rotation image filter, Darken and 
+             Lighten image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
              Blur filter, Natural Sunlight filter, Oil painting filter, Den Den mushi filter, Make image purple filter,
              Infrared image filter, Image skewing filter, , , and we will try to not stop at this point and continue for 
              a bigger program. 
@@ -125,7 +125,7 @@ ll get_num(ll condition, ll x = 0){
         if(check &&( stoll(num) + x <= condition)){
             return stoll(num);
         }
-        cout << "Please, Enter a right postive number that is inside the image: ";
+        cout << "Please, Enter a right positive number that is inside the image: ";
     }
 }
 
@@ -134,7 +134,7 @@ ll get_num(ll condition, ll x = 0){
 void grayscale_conversion(Image &image) {
     cout << "\n# ===== Welcome to the Grayscale Filter ===== #\n";
 
-    // To get the degree of the gray colour
+    // To get the degree of the gray color.
     for (int i = 0; i < image.width; i++){
         for (int j = 0; j < image.height; j++){
             int avg = 0;
@@ -278,7 +278,7 @@ void Flip_image(Image &image) {
             else if (choice == "2")         // if no
                 return;
 
-            // If he enter an invalid choice
+            // If he enters an invalid choice
             cout << "Please choose a valid option " << endl;
         }
     }
@@ -369,7 +369,7 @@ void rotate_image(string image_address) {
 //=========================================================>> Filter 7: Lighten And Darken <<===============================================================//
 
 void Lighten_Darken(Image& image) {
-    // Vaildation for files and the saved name is missed.
+    // Validation for files and the saved name is missed.
     cout << "\n# ===== Welcome to lighten and darken filter ===== #\n";
     cout << "Please enter the image name:\n";
     cout << " [1] Darken filter.\n [2] Lighten filter.\nEnter Your Choice:\n";
@@ -451,7 +451,7 @@ void adding_a_frame(string image_address){
     Image image1(image.width+(Min*0.02), image.height+(Min*0.02));
     string ch_colour, frame;
     
-    // Validate the colour menu
+    // Validate the color menu.
     while (true){
         cout << "What colour do you want?\n"
                 " [1] Red.                         [2] Blue.\n"
@@ -476,7 +476,7 @@ void adding_a_frame(string image_address){
 
     cout << endl;
 
-    // Validate the frame menu
+    // Validate the frame menu.
     while (true){
         cout << "What frame do you want?\n"
                 " [1] Simple frame.\n [2] Fancy frame.\n"
@@ -496,7 +496,7 @@ void adding_a_frame(string image_address){
         cout << "Invalid Choice. Try Again." << endl << endl;
     }
 
-    // Frame function
+    // Frame function.
     cout << endl;
     for (int i = 0; i < image1.width; ++i) {
         for (int j = 0; j < image1.height; ++j) {
@@ -590,7 +590,7 @@ void detect_edges(string photo){
         }
     }
 
-    // The idea of the detect
+    // The idea of the detecting.
     float avg = 0, avg2 = 0, avg3 = 0, avg4 = 0, avg5 = 0;
     for (int i = 0; i < image.width; i++){
         for (int j = 0; j < image.height; j++){
@@ -910,15 +910,15 @@ void detect_edges(string photo){
 
 void resize_filter(string image_address){
     Image img(image_address);
-    // To show the user image data
+    // To show the user image data.
     cout << endl << "# ===== Welcome to Resize Image Filter ===== #" << endl;
     cout << "Image Height is : " << img.height << endl;
     cout << "Image Width is : " << img.width << endl;
     
-    // To see how would user enter the resize dimention of image
+    // To see, how would user enter the resize dimention of image.
     string choice;
     while (true){
-        cout << "What do you want new image to be? \n [1] With a new dimintion for the image \n [2] its size increase by a certain percentage\nYour choice :";
+        cout << "What do you want new image to be? \n [1] With a new dimintion for the image.\n [2] Its size increase by a certain percentage.\nEnter Your Choice :";
         getline(cin, choice);
         if(choice == "1" || choice == "2")
             break;
@@ -926,7 +926,7 @@ void resize_filter(string image_address){
     }
 
     double image_width, image_height, change_width, change_height, percentage_change_w, percentage_change_h;
-    // If he wants to enter new dimintion 
+    // If he wants to enter new dimintion .
     if(choice == "1"){
         cout << "Please, Enter the new width of the image : ";
         image_width = get_num(LONG_LONG_MAX);
@@ -1049,9 +1049,9 @@ void natural_sunlight(string image_address){
 
 
 
-// =================================================>> Filter 16: Make photo more purpule <<================================================================ //
+// =================================================>> Filter 16: Make photo more purple <<================================================================ //
 
-void look_puple(string image_address){
+void look_purple(string image_address){
     cout << "\n# ===== Welcome to the Look Purple Filter ===== #\n";
     Image image(image_address);
   
@@ -1128,8 +1128,8 @@ int main() {
         string choice_menu;
         while (true) {
             cout << "\nChoose One Of This Filters:-" << endl;
-            cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
-            cout << " [7] Daeken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filters.\n [11] Resizing Image Filter.\n";
+            cout << " [1] Grayscale Conversion.\n [2] Black and White Filter.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
+            cout << " [7] Darken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filter.\n [11] Resizing Image Filter.\n";
             cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Oil Painting Filter.\n [15] Den Den Mochi Filter.\n [16] Look Purple Filter.\n";
             cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n [21] Saving Image. \n [22] Exit Application .\nEnter Your Choice : ";
             getline(cin, choice_menu);
@@ -1209,7 +1209,7 @@ int main() {
         
             // Make image purple filter
         else if(choice_menu == "16")
-            look_puple(nameimage);
+            look_purple(nameimage);
         
             // Infrared image filter
         else if(choice_menu == "17")
@@ -1227,7 +1227,7 @@ int main() {
         // else if(choice_menu == "20")
         //     filter(nameimage);
         
-            // To save photo
+            // To save the photo.
         else if (choice_menu == "21"){
             string saved = savingWay(nameimage);
             image.saveImage(saved);
