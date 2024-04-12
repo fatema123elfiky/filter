@@ -1264,7 +1264,7 @@ int main() {
         // To exit program
         else if (choice_menu == "22") {
             while (true) {
-                cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                cout << "Did you saved your work?\nNote : If you don't save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your Choice :";
                 string end;
                 getline(cin, end);
                 if (end == "2") {
@@ -1295,7 +1295,7 @@ int main() {
 
             else if (choice == "2") {        // If he doesn't
                 while (true) {
-                    cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                    cout << "Did you saved your work?\nNote : If you don't save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your Choice :";
                     string end;
                     getline(cin, end);
                     if (end == "2") {
