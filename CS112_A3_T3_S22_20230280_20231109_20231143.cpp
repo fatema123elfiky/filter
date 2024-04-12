@@ -1,11 +1,11 @@
 /*
 --> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
-             in this once there is 5 different filters that are : Gray Scale filter, Black and White filter,
-             invert image filter, merage two images, Flip image filter, Rotation image filter, Darken and 
-             lighen image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
-             Blur filter, natural sunlight filter, oil painting filter, Den Den mushi filter, make image purple,
-             infared image filter, image skewing, , , and we will try to not stop at this point and continue for 
+             in this once there is 20 different filters that are : Gray Scale filter, Black and White filter,
+             Invert image filter, Merage two images, Flip image filter, Rotation image filter, Darken and 
+             Lighen image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
+             Blur filter, Natural Sunlight filter, Oil painting filter, Den Den mushi filter, Make image purple filter,
+             Infrared image filter, Image skewing filter, , , and we will try to not stop at this point and continue for 
              a bigger program. 
 
 --> Author of (1, 4, 7, 10) filters: Fatema El-Zhraa Ahmed Mohamed El-Fiky.             (ID:20230280)         (Section : S22)
@@ -85,7 +85,6 @@ string validationpart2(string nameOfSavedImage) {
         else {
             break;
         }
-
     }
     return nameOfSavedImage;
 }
@@ -148,7 +147,6 @@ void grayscale_conversion(Image &image) {
                 image(i, j, k) = avg;
         }
     }
-
 }
 
 // ========================================================>> Filter 2: Black and White <<============================================================ //
@@ -928,7 +926,7 @@ void resize_filter(string image_address){
     }
 
     double image_width, image_height, change_width, change_height, percentage_change_w, percentage_change_h;
-    // If he want to enter new dimintion 
+    // If he wants to enter new dimintion 
     if(choice == "1"){
         cout << "Please, Enter the new width of the image : ";
         image_width = get_num(LONG_LONG_MAX);
@@ -936,7 +934,7 @@ void resize_filter(string image_address){
         image_height = get_num(LONG_LONG_MAX);
     }
 
-    // If he want to increase the size of image by a certain percentage
+    // If he wants to increase the size of image by a certain percentage
     else{
         cout << "Please, Enter the percentage change of the image width (from 100%) : ";
         percentage_change_w = get_num(LONG_LONG_MAX);
@@ -970,7 +968,7 @@ void resize_filter(string image_address){
 void blur_images(string image_address){
     cout << "\n# ===== Welcome to the Blur Images Filter ===== #\n";
     Image image(image_address);
-    ll r = 30, area = ((2*r) +1) * ((2*r) +1);
+    ll r = 35, area = ((2*r) +1) * ((2*r) +1);
 
     // To build 3D prefix sum vector.
     vector<vector<vector<ll>>> pref(image.width, vector<vector<ll>>(image.height, vector<ll>(3)));
@@ -1111,11 +1109,11 @@ int main() {
     // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
-    cout << "    in this once there is a 5 different filters that are : grayscale filter, black and white filter," << endl;
-    cout << "    invert image filter, Merge two image filter, Flipping image filter, Rotating image filter, Darken" << endl;
-    cout << "    and lighting image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing" << endl;
-    cout << "    image, Blur filter, natural sunlight filter, oil painting filter, Den Den mushi filter, make image" << endl;
-    cout << "    purple,infared image filter, image skewing, , , and we will try to not stop at this point and " << endl; 
+    cout << "    in this once there is a 20 different filters that are : Grayscale filter, Black and White filter," << endl;
+    cout << "    Invert image filter, Merge two image filter, Flipping image filter, Rotating image filter, Darken" << endl;
+    cout << "    and Lighting image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing" << endl;
+    cout << "    image, Blur filter, Natural Sunlight filter, Oil painting filter, Den Den mushi filter, Make image" << endl;
+    cout << "    purple, Infrared image filter, Image skewing filter, , , and we will try to not stop at this point and " << endl; 
     cout << "    continue for a bigger program." << endl;
     cout << "================================================================================================================" << endl;
     string nameimage;
@@ -1133,7 +1131,7 @@ int main() {
             cout << " [1] Grayscale Conversion.\n [2] Black and White.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
             cout << " [7] Daeken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filters.\n [11] Resizing Image Filter.\n";
             cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Oil Painting Filter.\n [15] Den Den Mochi Filter.\n [16] Look Purple Filter.\n";
-            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n [21] Saving Image \n [22] Exit Program .\nYour Choice is : ";
+            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n [21] Saving Image. \n [22] Exit Application .\nEnter Your Choice : ";
             getline(cin, choice_menu);
 
             bool check = false;
