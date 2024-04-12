@@ -1125,6 +1125,7 @@ int main() {
     // To keep the program running.
     while (true) {
         // Menu choice to check of it
+        bool checkkk = false;
         string choice_menu;
         while (true) {
             cout << "\nChoose One Of This Filters:-" << endl;
