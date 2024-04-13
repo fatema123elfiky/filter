@@ -1124,8 +1124,22 @@ void infrared(string image_address) {
 
 
 
-// =================================================>>Filter 19 : Filter <<================================================================== //
-
+// =================================================>>Filter 19 : Sea Filter  <<================================================================== //
+void sea(Image & image)
+{
+    cout<<"Welcome to  sea filter\n"
+    for (int i = 0; i < image.width; i++)
+    {
+        for (int j = 0; j < image.height; j++)
+        {
+           
+            image(i, j, 2) = max(image(i, j, 2), max(image(i, j, 0), image(i, j, 1)));
+            image(i, j, 0) = 0;
+            image(i, j, 1) = min(image(i, j, 2), max(image(i, j, 0), image(i, j, 1)));
+        }
+    }
+    
+}
 
 
 // =================================================>>Filter 20 : Filter <<================================================================== //
@@ -1249,8 +1263,8 @@ int main() {
     //     skewing_image(nameimage);
 
         // Filter
-    // else if(choice_menu == "19")
-    //     filter(nameimage);
+     else if(choice_menu == "19")
+         sea(image);
 
         // Filter
     // else if(choice_menu == "20")
