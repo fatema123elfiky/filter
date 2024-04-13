@@ -5,7 +5,7 @@
              Invert image filter, Merge two images, Flip image filter, Rotation image filter, Darken and
              Lighten image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
              Blur filter, Natural Sunlight filter, Oil painting filter, Den Den mushi filter, Make image purple filter,
-             Infrared image filter, Image skewing filter, , , and we will try to not stop at this point and continue for
+             Infrared image filter, Image skewing filter, The Sea filter, , and we will try to not stop at this point and continue for
              a bigger program.
 
 --> Author of (1, 4, 7, 10) filters: Fatema El-Zhraa Ahmed Mohamed El-Fiky.             (ID:20230280)         (Section : S22)
@@ -1133,9 +1133,9 @@ void sea(Image & image)
     {
         for (int j = 0; j < image.height; j++)
         {
-            image(i, j, 2) = max(image(i, j, 2), max(image(i, j, 0), image(i, j, 1)));
             image(i, j, 0) = 0;
             image(i, j, 1) = min(image(i, j, 2), max(image(i, j, 0), image(i, j, 1)));
+            image(i, j, 2) = max(image(i, j, 2), max(image(i, j, 0), image(i, j, 1)));
         }
     }
 }
@@ -1154,7 +1154,7 @@ int main() {
     cout << "    Invert image filter, Merge two image filter, Flipping image filter, Rotating image filter, Darken" << endl;
     cout << "    and Lighting image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing" << endl;
     cout << "    image, Blur filter, Natural Sunlight filter, Oil painting filter, Den Den mushi filter, Make image" << endl;
-    cout << "    purple, Infrared image filter, Image skewing filter, , , and we will try to not stop at this point and " << endl;
+    cout << "    purple, Infrared image filter, Image skewing filter, The Sea filter, , and we will try to not stop at this point and " << endl;
     cout << "    continue for a bigger program." << endl;
     cout << "================================================================================================================" << endl;
     string nameimage;
@@ -1172,7 +1172,7 @@ int main() {
             cout << " [1] Grayscale Conversion.\n [2] Black and White Filter.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
             cout << " [7] Darken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filter.\n [11] Resizing Image Filter.\n";
             cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Oil Painting Filter.\n [15] Den Den Mochi Filter.\n [16] Look Purple Filter.\n";
-            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] Filter.\n [20] Filter.\n [21] Saving Image. \n [22] Exit Application .\nEnter Your Choice : ";
+            cout << " [17] Infrared Image Filter.\n [18] Skewing Image Filter.\n [19] The Sea Filter.\n [20] Filter.\n [21] Saving Image. \n [22] Exit Application .\nEnter Your Choice : ";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -1260,7 +1260,7 @@ int main() {
     // else if(choice_menu == "18")
     //     skewing_image(nameimage);
 
-        // Filter
+        // The Sea filter.
      else if(choice_menu == "19")
          sea(image);
 
