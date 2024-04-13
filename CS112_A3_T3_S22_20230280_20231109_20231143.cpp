@@ -1,7 +1,7 @@
 /*
 --> Name: CS112_A3_Part1_S22_20230280_20231109_20231143.cpp
 --> Purpose: A small program that make some photoshop edits on any image you want by only using its address,
-             in this once there is 20 different filters that are : Gray Scale filter, Black and White filter,
+             in this once there is 15 different filters that are : Gray Scale filter, Black and White filter,
              Invert image filter, Merge two images, Flip image filter, Rotation image filter, Darken and
              Lighten image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing image,
              Blur filter, Natural Sunlight filter,Make image purple, Infrared image filter, and we will try to 
@@ -195,9 +195,137 @@ void invert_image(Image& image) {
 }
 
 // ========================================================>> Filter 4: Merge two Images <<=============================================================== //
+void merge_filter(Image &image1){
+    cout << "# ==== Welcome to Merge Two Image Filter ==== #\n\n";
+    
+    // To get image2 to merge it with image1.
+    string name2;
+    cout << "Please, Enter the second image:";
+    getline(cin, name2);
+    name2 = validationpart1(name2);
+    Image image2(name2);
 
+    // To see the user how he wants to merge.
+    cout << "What do you prefer?\n [1] Crop the Two Images common Diminsion. \n [2] Resize one of them to fit the other\n Your choice is: ";
+    string choice;
+    getline(cin, choice);
+    // To check the menu choice.
+    while (choice != "1" && choice != "2") {
+        cout << "pls enter a valid choice\n";
+        getline(cin, choice);
+    }
 
+    // Define some needed variables
+    double WidthImage = 0, Length = 0; 
+    string ans;
+    Image res;
 
+    // If he chooses crop.
+    if (choice == "1") {
+        //comparing width
+        if (image1.width > image2.width) {
+            WidthImage = image2.width;
+        }
+        else {
+            WidthImage = image1.width;
+        }
+
+        // comparing length 
+        if (image1.height > image2.height) {
+            Length = image2.height;
+        }
+        else {
+            Length = image1.height;
+        }
+    }
+
+    // If he chooses resize.
+    else if (choice == "2") {
+        // To see what user will choose.
+        cout << "Choose: Which one do you want to fit the other?\n [1] the first image to the second one\n [2] The second image to the first one\nEnter your choice: ";
+        getline(cin, ans);
+        // For menu validation
+        while (ans != "1" && ans != "2"){
+            cout << "enter a valid choice\n";
+            getline(cin, ans);
+        }
+
+        // If he chooses the first image to the second one.
+        double change_width, change_height;
+        if (ans == "1"){
+            change_width = double(image1.width) / double(image2.width);
+            change_height = double(image1.height) / double(image2.height);
+
+            // Resize image function
+            Image image3(image2.width, image2.height);
+            for (double i = 0; i < image2.height; i++) {
+                for (double j = 0; j < image2.width; j++) {
+                    for (int k = 0; k < 3; k++)
+                        image3(j, i, k) = image1(round(j * change_width), round(i * change_height), k);
+                }
+            }
+            res = image3;
+            WidthImage = image3.width;
+            Length = image3.height;
+        }
+
+        // If he chooses the second image to the first one.
+        else {
+            change_width = double(image2.width) / double(image1.width);
+            change_height = double(image2.height) / double(image1.height);
+
+            // Resize image function
+            Image image3(image1.width, image1.height);
+            for (double i = 0; i < image1.height; i++) {
+                for (double j = 0; j < image1.width; j++) {
+                    for (int k = 0; k < 3; k++)
+                        image3(j, i, k) = image2(round(j * change_width), round(i * change_height), k);
+                }
+            }
+            res = image3;
+            WidthImage = image3.width;
+            Length = image3.height;
+        }
+    } 
+
+    // Defining some images
+    Image imagee(WidthImage, Length);
+    Image main1;
+    Image main2;
+
+    // if crop
+    if (choice == "1"){
+        main1 = image1;
+        main2 = image2;
+    }
+
+    // if resize
+    else if (choice == "2"){
+        if (ans == "1") {
+            main1 = res;
+            main2 = image2;
+        }
+        else if (ans == "2") {
+            main1 = image1;
+            main2 = res;
+        }
+    }
+
+    // The idea of merge.
+    for (int i = 0; i < imagee.width; i++){
+        for (int j = 0; j < imagee.height; j++){
+            for (int k = 0; k < 3; k++){
+                if (j % 2 == 0) {
+                    imagee(i, j, k) = main1(i, j, k);
+                }
+                else {
+                    imagee(i, j, k) = main2(i, j, k);
+                }
+            }
+        }
+    }
+    image1 = imagee;
+}
 // ========================================================>> Filter 5: Flip image <<================================================================ //
 
 void Flip_image(Image& image) {
@@ -962,7 +1090,7 @@ int main() {
     // Showing what program do.
     cout << "# ===== Welcome To Baby Photoshop Application ===== #" << endl;
     cout << "--> A small program that make some photoshop edits on any image you want by only using its address," << endl;
-    cout << "    in this once there is a 20 different filters that are : Grayscale filter, Black and White filter," << endl;
+    cout << "    in this once there is a 15 different filters that are : Grayscale filter, Black and White filter," << endl;
     cout << "    Invert image filter, Merge two image filter, Flipping image filter, Rotating image filter, Darken" << endl;
     cout << "    and Lighting image filter, Crop filter, Adding frame to image filter, Detect edge filter, Resizing" << endl;
     cout << "    image, Blur filter, Natural Sunlight filter,Make image purple, Infrared image filter, and we will " << endl;
@@ -984,7 +1112,7 @@ int main() {
             cout << " [1] Grayscale Conversion.\n [2] Black and White Filter.\n [3] Invert Image Colours.\n [4] Merge Two Image.\n [5] Flip Image.\n [6] Rotating Image.\n";
             cout << " [7] Darken and lighting Image.\n [8] Crop Image.\n [9] Adding Frame to Image.\n [10] Detect edge Filter.\n [11] Resizing Image Filter.\n";
             cout << " [12] Blur Filter.\n [13] Natural Sunlight Filter.\n [14] Look Purple Filter.\n [15] Infrared Image Filter.\n";
-            cout << " [16] Saving Image. \n [17] Exit Application .\nEnter Your Choice : ";
+            cout << " [16] Saving Image and Changing image. \n [17] Exit Application .\nEnter Your Choice : ";
             getline(cin, choice_menu);
 
             bool check = false;
@@ -1013,8 +1141,8 @@ int main() {
             invert_image(image);
 
         // Merge Two Image Filters
-    // else if (choice_menu == "4")
-        // merge_two_image(nameimage);
+        else if (choice_menu == "4")
+            merge_filter(image);
 
         // Flip filter
         else if (choice_menu == "5")
