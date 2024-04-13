@@ -1052,9 +1052,10 @@ void natural_sunlight(string image_address) {
 
 
 // =================================================>> Filter 15: Den Den Mochi Filter <<=================================================================== //
+
 void old_tv(Image& image)
 {
-    cout << "Welcome to the tv filter\n";
+    cout << "\n# ===== Welcome to The TV Filter ===== #\n";
     srand(unsigned int(time(0)));
     int intens = 25;
 
@@ -1062,7 +1063,6 @@ void old_tv(Image& image)
     {
         for (int j = 0; j < image.height; j++)
         {
-            
             int random = rand() % (2 * intens + 1) - intens;
             image(i, j, 0) = (random + image(i, j, 0)) / 2;
             image(i, j, 1) = (random + image(i, j, 1)) / 2;
@@ -1245,7 +1245,7 @@ int main() {
     //     oil_painting(nameimage);
 
         // Den Den Mochi filter
-     else if(choice_menu == "15")
+     else if (choice_menu == "15")
             old_tv(image);
 
         // Make image purple filter
@@ -1257,18 +1257,18 @@ int main() {
             infrared(nameimage);
 
         // Skewing image Filter
-    // else if(choice_menu == "18")
+    // else if (choice_menu == "18")
     //     skewing_image(nameimage);
 
         // The Sea filter.
-     else if(choice_menu == "19")
+     else if (choice_menu == "19")
          sea(image);
 
         // Filter
-    // else if(choice_menu == "20")
+    // else if (choice_menu == "20")
     //     filter(nameimage);
 
-        // To save photo
+        // To save the photo.
         else if (choice_menu == "21") {
             string saved = savingWay(nameimage);
             image.saveImage(saved);
@@ -1299,7 +1299,7 @@ int main() {
         // To exit program
         else if (choice_menu == "22") {
             while (true) {
-                cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                cout << "Did you saved your work?\nNote : If you dont save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your choice :";
                 string end;
                 getline(cin, end);
                 if (end == "2") {
@@ -1330,7 +1330,7 @@ int main() {
 
             else if (choice == "2") {        // If he doesn't
                 while (true) {
-                    cout << "Did you saved your work?\nNote : If you dont save you will lose all your work\n [1] Yes, I saved it \n [2] No, I want to save it \n Your choice :";
+                    cout << "Did you saved your work?\nNote : If you dont save you will lose all your work.\n [1] Yes, I saved it.\n [2] No, I want to save it.\nEnter Your Choice :";
                     string end;
                     getline(cin, end);
                     if (end == "2") {
@@ -1346,7 +1346,7 @@ int main() {
                         return 0;
                     }
 
-                    cout << "Please, Enter a valid option" << endl;
+                    cout << "Please, Enter a valid option." << endl;
                 }
             }
             // If he entered an invalid choice
