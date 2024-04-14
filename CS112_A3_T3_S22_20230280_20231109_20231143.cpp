@@ -1116,7 +1116,7 @@ int main() {
             getline(cin, choice_menu);
 
             bool check = false;
-            for (int i = 1; i <= 21; i++) {         // Checking of answer.
+            for (int i = 1; i <= 17; i++) {         // Checking of answer.
                 if (choice_menu == to_string(i)) {
                     check = true;
                     break;
