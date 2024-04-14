@@ -50,7 +50,6 @@ string validationpart1(string nameimage) {
     return nameimage;
 }
 
-
 // To check if the name of the photo is valid and extension.
 string validationpart2(string nameOfSavedImage) {
     while (nameOfSavedImage.size() <= 4) {
