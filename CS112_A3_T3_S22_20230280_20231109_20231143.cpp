@@ -1270,6 +1270,8 @@ int main() {
                     cout << "Please, Enter the photo :\n";
                     getline(cin, nameimage);
                     nameimage = validationpart1(nameimage);
+                    Image image1(nameimage);
+                    image = image1;
                     break;
                 }
 
